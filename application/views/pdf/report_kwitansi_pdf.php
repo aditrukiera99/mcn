@@ -117,7 +117,7 @@ $harga_satuan2 =  $dt_det->HARGA_INVOICE - $harga_satuan;
 <table style="text-align: left; width: 100%; margin-left: auto; margin-right: auto;" border="0" cellpadding="0">
   <tbody>
     <tr>
-      <td style="vertical-align: middle; width: 133px; text-align: center;"><img style="width: 45px; height: 450px;" alt="" src="<?=$base_url2;?>assets/img/mcn-2.png"><br>
+      <td style="vertical-align: middle; width: 133px; text-align: center;"><img style="width: 45px; height: 400px;" alt="" src="<?=$base_url2;?>assets/img/mcn-2.png"><br>
       </td>
       <td style="vertical-align: top;">
       <h1 style="text-align: center;">KWITANSI</h1>
@@ -306,4 +306,18 @@ function terbilang($x, $style=4) {
     }     
     return $hasil;
 }
+?>
+<?PHP
+    $width_custom = 14;
+    $height_custom = 8.50;
+    
+    $content = ob_get_clean();
+    $width_in_inches = $width_custom;
+    $height_in_inches = $height_custom;
+    $width_in_mm = $width_in_inches * 21.4;
+    $height_in_mm = $height_in_inches * 19.8;
+    $html2pdf = new HTML2PDF('P','A4','en');
+    $html2pdf->pdf->SetTitle('Penawaran Barang');
+    $html2pdf->WriteHTML($content, isset($_GET['vuehtml']));
+    $html2pdf->Output('cetak_penawaran_barang.pdf');
 ?>

@@ -142,7 +142,7 @@ input[type=checkbox]
 			<label class="control-label"> <b style="font-size: 14px;"> Tanggal Transaksi </b> </label>
 				<div class="controls">
 					<div id="datetimepicker1" class="input-append date ">
-						<input readonly style="width: 80%;" value="<?=date('d-m-Y');?>" required name="tgl_trx" data-format="dd-MM-yyyy" type="text" value="<?=$dt->TGL_TRX;?>">
+						<input readonly style="width: 80%;" value="<?=date('d-m-Y');?>t name="tgl_trx" data-format="dd-MM-yyyy" type="text" value="<?=$dt->TGL_TRX;?>">
 						<span class="add-on ">
 							<i class="icon-calendar"></i>
 						</span>
@@ -221,6 +221,7 @@ input[type=checkbox]
 			<label class="control-label"> <b style="font-size: 14px;"> Segel Bawah </b> </label>
 			<div class="controls">
 				<input type="text" class="span12" value="<?=$dt->SEGEL_BAWAH;?>" name="segel_bawah" id="segel_bawah" style="font-size: 15px;">
+				<input type="text" id="id_produk_1"  value="<?=$dt->ID;?>" name="id_pnj" style="background:#FFF;">
 			</div>
 		</div>
 	</div>
@@ -276,16 +277,11 @@ input[type=checkbox]
 						</tr>
 					</thead>
 					<tbody id="tes">
-						<?php 
-							foreach ($dt_detail as $key => $value_dt) {
-								# code...
-							}
-						?>
 						<tr id="tr_1" class="tr_utama">
 							<td align="left" style="vertical-align:middle;"> 
 								<div class="control-group">
 										<div class="controls">
-											<select  required data-placeholder="Pilih ..." class="chzn-select" tabindex="2"  name="kode_akun[]">
+											<select data-placeholder="Pilih ..." class="chzn-select" tabindex="2"  name="kode_akun[]">
 												<option value="">Pilih ...</option>
 												<?PHP foreach ($get_list_akun_all as $key => $akun_all) { ?>
 												<?PHP 
@@ -308,10 +304,10 @@ input[type=checkbox]
 								<div class="control-group">
 									<div class="controls">
 										<div class="input-append">
-											<input type="text" id="nama_produk_1" value="<?=$value_dt->NAMA_PRODUK;?>" name="nama_produk[]" readonly style="background:#FFF; width: 60%;" value="<?=$dt_detail->NAMA_PRODUK;?>">
-											<input type="hidden" id="id_produk_1" value="<?=$value_dt->ID_PRODUK;?>"  name="produk[]" readonly style="background:#FFF;">
-											<input type="hidden" id="id_produk_1"  value="<?=$value_dt->ID;?>" name="id_pnj[]" readonly style="background:#FFF;">
-											<input type="hidden" id="jenis_produk_1" value="" name="jenis_produk[]" readonly style="background:#FFF;" value="">
+											<input type="text" id="nama_produk_1" name="nama_produk[]" readonly style="background:#FFF; width: 60%;" value="<?=$dt_detail->NAMA_PRODUK;?>">
+											<input type="hidden" id="id_produk_1" value="<?=$dt_detail->ID_PRODUK;?>"  name="produk[]" readonly style="background:#FFF;">
+											
+											<input type="hidden" id="jenis_produk_1" name="jenis_produk[]" readonly style="background:#FFF;" value="">
 											<button style="width: 30%;" onclick="show_pop_produk(1);" type="button" class="btn">Cari</button>
 										</div>
 									</div>
@@ -320,25 +316,25 @@ input[type=checkbox]
 
 							<td align="center" style="vertical-align:middle;"> 
 								<div class="controls">
-									<input onkeyup="FormatCurrency(this); always_one(1); hitung_total(1);" onchange="" id="qty_1" style="font-size: 18px; text-align:center; width: 80%;" type="text"  value="<?=$value_dt->QTY;?>" name="qty[]">
+									<input onkeyup="FormatCurrency(this); always_one(1); hitung_total(1);" onchange="" id="qty_1" style="font-size: 18px; text-align:center; width: 80%;" type="text"  value="<?=$dt_detail->QTY;?>" name="qty[]">
 								</div>
 							</td>
 
 							<td align="center" style="vertical-align:middle;"> 
 								<div class="controls">
-									<input onkeyup="FormatCurrency(this); hitung_total(1);" style="font-size: 18px; text-align:right; width: 80%;" type="text"  value="<?=$value_dt->MODAL;?>" name="harga_modal[]" id="harga_modal_1">
+									<input onkeyup="FormatCurrency(this); hitung_total(1);" style="font-size: 18px; text-align:right; width: 80%;" type="text"  value="<?=$dt_detail->MODAL;?>" name="harga_modal[]" id="harga_modal_1">
 								</div>
 							</td>
 
 							<td align="center" style="vertical-align:middle;"> 
 								<div class="controls">
-									<input required onkeyup="FormatCurrency(this); hitung_total(1);" style="font-size: 18px; text-align:right; width: 80%;" type="text"  value="<?=$value_dt->HARGA_JUAL;?>" name="harga_jual[]" id="harga_jual_1">
+									<input onkeyup="FormatCurrency(this); hitung_total(1);" style="font-size: 18px; text-align:right; width: 80%;" type="text"  value="<?=$dt_detail->HARGA_JUAL;?>" name="harga_jual[]" id="harga_jual_1">
 								</div>
 							</td>
 
 							<td align="center" style="vertical-align:middle;"> 
 								<div class="controls">
-									<input required onkeyup="FormatCurrency(this); hitung_total(1);" style="font-size: 18px; text-align:right; width: 80%;" type="text"  value="<?=$value_dt->HARGA_INVOICE;?>" name="harga_invoice[]" id="harga_invoice_1">
+									<input onkeyup="FormatCurrency(this); hitung_total(1);" style="font-size: 18px; text-align:right; width: 80%;" type="text"  value="<?=$dt_detail->HARGA_INVOICE;?>" name="harga_invoice[]" id="harga_invoice_1">
 								</div>
 							</td>
 
@@ -346,13 +342,13 @@ input[type=checkbox]
 								<div class="span12">
 								<div class="controls">
 									<select data-placeholder="Tax..." class="" tabindex="2" name="tax[]" id="tax_1" style="width:100px;" onchange="hitung_total(1);">
-										<option <?PHP if($value_dt->PAJAK == "") { echo "selected";}?> value="">Tidak</option>
-										<option <?PHP if($value_dt->PAJAK == "PPN") { echo "selected";}?> value="PPN">PPN</option>
+										<option <?PHP if($dt_detail->PAJAK == "") { echo "selected";}?> value="">Tidak</option>
+										<option <?PHP if($dt_detail->PAJAK == "PPN") { echo "selected";}?> value="PPN">PPN</option>
 									</select>
 
-									<input readonly onkeyup="FormatCurrency(this);" style="font-size: 18px; text-align:right; width: 80%; background:#FFF;" type="hidden"  value="<?=$value_dt->CASHBACK;?>" name="cashback[]" id="cashback_1">
+									<input readonly onkeyup="FormatCurrency(this);" style="font-size: 18px; text-align:right; width: 80%; background:#FFF;" type="hidden"  value="<?=$dt_detail->CASHBACK;?>" name="cashback[]" id="cashback_1">
 
-									<input readonly onkeyup="FormatCurrency(this);" style="font-size: 18px; text-align:right; width: 80%; background:#FFF;" type="hidden"  value="<?=$value_dt->PROFIT;?>" name="profit[]" id="profit_1">
+									<input readonly onkeyup="FormatCurrency(this);" style="font-size: 18px; text-align:right; width: 80%; background:#FFF;" type="hidden"  value="<?=$dt_detail->PROFIT;?>" name="profit[]" id="profit_1">
 								</div>
 								</div>
 							</td>
@@ -456,7 +452,7 @@ input[type=checkbox]
 	<td align="center" style="vertical-align:middle;"> 
 		<div class="control-group">
 			<div class="controls">
-				<select  required data-placeholder="Pilih ..." class="cek_select" tabindex="2"  name="kode_akun[]" style="width: 100%;" >
+				<selectt data-placeholder="Pilih ..." class="cek_select" tabindex="2"  name="kode_akun[]" style="width: 100%;" >
 					<option value="">Pilih ...</option>
 					<?PHP foreach ($get_list_akun_all as $key => $akun_all) { ?>
 					<?PHP if($akun_all->KODE_AKUN == "401.02.01"){
@@ -801,13 +797,13 @@ function tambah_data() {
 
 		'<td align="center" style="vertical-align:middle;"> '+
 			'<div class="controls">'+
-				'<input required onkeyup="FormatCurrency(this); hitung_total(1);" style="font-size: 18px; text-align:right; width: 80%;" type="text"  value="" name="harga_jual[]" id="harga_jual_1">'+
+				'<input onkeyup="FormatCurrency(this); hitung_total(1);" style="font-size: 18px; text-align:right; width: 80%;" type="text"  value="" name="harga_jual[]" id="harga_jual_1">'+
 			'</div>'+
 		'</td>'+
 
 		'<td align="center" style="vertical-align:middle;"> '+
 			'<div class="controls">'+
-				'<input required onkeyup="FormatCurrency(this); hitung_total(1);" style="font-size: 18px; text-align:right; width: 80%;" type="text"  value="" name="harga_invoice[]" id="harga_invoice_1">'+
+				'<input onkeyup="FormatCurrency(this); hitung_total(1);" style="font-size: 18px; text-align:right; width: 80%;" type="text"  value="" name="harga_invoice[]" id="harga_invoice_1">'+
 			'</div>'+
 		'</td>'+
 

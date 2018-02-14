@@ -120,11 +120,11 @@ class Transaksi_penjualan_c extends CI_Controller {
 			$tgl_inv       = $this->input->post('tgl_trx');
 			$tgl_kwi       = $this->input->post('tgl_trx');	
 			$operator      = $user->NAMA;
-			$id_penjualan  = $this->input->post('id_pnj');
+			
 
 			$this->model->ubah_penjualan_detail($id,$no_trx, $id_pelanggan, $pelanggan, $alamat_tagih, $kota_tujuan, $no_po, $no_do, $tgl_trx, $keterangan, $jatuh_tempo, $no_pol, $sopir, $alat_angkut, $segel_atas, $segel_bawah, $broker, $temperatur, $density, $flash_point, $water_content, $tgl_do, $tgl_sj, $tgl_inv, $tgl_kwi, $operator);
 
-			
+			$id_penjualan  = $this->input->post('id_pnj');
 			$id_produk 	    = $this->input->post('produk');
 			$kode_akun 	 	= $this->input->post('kode_akun');
 			$nama_produk 	= $this->input->post('nama_produk');

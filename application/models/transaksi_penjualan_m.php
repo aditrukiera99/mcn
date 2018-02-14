@@ -56,8 +56,8 @@ class Transaksi_penjualan_m extends CI_Model
         SELECT * FROM ak_penjualan_new_detail 
         WHERE ID_PENJUALAN = '$id'
         ";
-
-        return $this->db->query($sql)->result();
+       
+        return $this->db->query($sql)->row();
     }
 
     function hapus_voucher($id_klien, $no_voc){
@@ -559,7 +559,7 @@ class Transaksi_penjualan_m extends CI_Model
 
     function hapus_detail_trx($id){
         $sql = "
-        DELETE FROM ak_penjualan_new_detail WHERE ID_PENJUALAN = $id
+        DELETE FROM ak_penjualan_new_detail WHERE ID_PENJUALAN = '$id'
         ";
 
         $this->db->query($sql);
