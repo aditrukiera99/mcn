@@ -45,13 +45,6 @@ table th {
 
 <table cellspacing="0"> 
     <tr>
-        <td align="left" >
-            <h5>
-               PT. PRIMA ELEKTRIK POWER <br>  
-            </h5>
-        </td>
-    </tr>
-    <tr>
         <td align="center" colspan="2">
             <h4>
                 DAFTAR MUTASI HUTANG<br>
@@ -67,7 +60,7 @@ table th {
 
     <tr>
         <td style="vertical-align:top;">
-            <table align="left" class="grid">
+            <table align="left" class="grid" style="width: 100%;">
                 <tr>
                     <th style='text-align:center;' class='kolom_header'> NO </th>
                     <th style='text-align:center;' class='kolom_header'> NAMA PBF </th>

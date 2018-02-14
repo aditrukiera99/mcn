@@ -2,7 +2,6 @@
 
 <style>
 .gridth {
-    background: #1793d1;
     vertical-align: middle;
     color : #FFF;
     text-align: center;
@@ -33,21 +32,10 @@ table th {
     height: 5px;
     padding:5px;
     vertical-align: middle;
-    background: #388ed1;
 }
 
 </style>
 
-
-<table cellspacing="0" align="left"> 
-    <tr>
-        <td align="left" >
-            <h5>
-                PT. Prima Elektrik Power <br>    
-            </h5>
-        </td>
-    </tr>
-</table>
 
 <table cellspacing="0" align="center"> 
     <tr>
@@ -66,8 +54,8 @@ table th {
 
 <table align="center" class="grid">
     <tr>
-        <th style='text-align:center;' class='kolom_header'> NOMOR </th>
-        <th style='text-align:center;' class='kolom_header'> PERKIRAAN </th>
+        <th style='text-align:center;' class='kolom_header' rowspan="2"> NOMOR AKUN </th>
+        <th style='text-align:center;' class='kolom_header' rowspan="2"> PERKIRAAN </th>
         <th style='text-align:center;' class='kolom_header' colspan="2"> NERACA AWAL </th>
         <th style='text-align:center;' class='kolom_header' colspan="2"> NERACA MUTASI</th>
         <th style='text-align:center;' class='kolom_header' colspan="2"> JURNAL MEMORIAL</th>
@@ -76,9 +64,6 @@ table th {
     </tr>
 
     <tr>
-        <th style='text-align:center;' class='kolom_header'>AKUN</th>
-        <th style='text-align:center;' class='kolom_header'></th>
-
         <th style='text-align:center;' class='kolom_header'>DEBET</th>
         <th style='text-align:center;' class='kolom_header'>KREDIT</th>
 

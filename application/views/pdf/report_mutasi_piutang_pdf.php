@@ -7,7 +7,6 @@ $base_url2 .=  str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT
 
 <style>
 .gridth {
-    background: #1793d1;
     vertical-align: middle;
     color : #FFF;
     text-align: center;
@@ -47,19 +46,6 @@ table th {
     $voc_now = "";
     $old_voc = "";
 ?>
-
-<table cellspacing="0" align="left"> 
-    <tr align="center">
-        <td align="left">
-            <h5>
-                PT. Prima Elektrik Power <br><br>
-                DIVISI <?=strtoupper($dt_unit->NAMA_UNIT);?>    
-            </h5>
-        </td>
-    </tr>
-</table>
-
-<hr>
 
 <table align="center">
     <tr>
@@ -143,7 +129,7 @@ table th {
     $height_in_inches = $height_custom;
     $width_in_mm = $width_in_inches * 17.4;
     $height_in_mm = $height_in_inches * 22.4;
-    $html2pdf = new HTML2PDF('L','A4','en');
+    $html2pdf = new HTML2PDF('P','A4','en');
     $html2pdf->pdf->SetTitle('Laporan Mutasi Piutang');
     $html2pdf->WriteHTML($content, isset($_GET['vuehtml']));
     $html2pdf->Output('Laporan_mutasi_piutang.pdf');

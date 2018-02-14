@@ -754,12 +754,6 @@ $dt_pengajuan_sub_kode_grup = $this->master_model_m->get_data_pengajuan_sub_kode
                   <?PHP } ?>
 
                   <li><a href="<?=base_url();?>lap_neraca_lajur_c"><i class=" icon-book"></i> Laporan Neraca Lajur </a></li>
-
-                  <li <?PHP if($view == "lap_rpb"){ echo "class='active'"; } ?> ><a href="<?=base_url();?>lap_realisasi_pendapatan_biaya_c"><i class=" icon-book"></i> Realisasi Pendapatan dan Biaya </a></li>
-                  <li <?PHP if($view == "lap_rku"){ echo "class='active'"; } ?> ><a href="<?=base_url();?>lap_rku_c"><i class=" icon-book"></i> Ringkasan Laporan Keuangan </a></li>
-                  <li <?PHP if($view == "lap_hutang"){ echo "class='active'"; } ?> ><a href="<?=base_url();?>lap_hutang_c"><i class=" icon-book"></i> Laporan Rincian Hutang </a></li>
-                  <li <?PHP if($view == "lap_pendapatan"){ echo "class='active'"; } ?> ><a href="<?=base_url();?>lap_hasil_pendapatan_c"><i class=" icon-book"></i> Laporan Hasil Pendapatan </a></li>
-                  <li <?PHP if($view == "lap_realisasi_rkp"){ echo "class='active'"; } ?> ><a href="<?=base_url();?>lap_realisasi_rkp_c"><i class=" icon-book"></i> Realisasi Pelaksanaan RKP </a></li>
                   
                    <li <?PHP if($view == "mutasi_hutang"){ echo "class='active'"; } ?> ><a href="<?=base_url();?>lap_mutasi_hutang_c"><i class=" icon-book"></i> Daftar Mutasi Hutang </a></li>
                   <li <?PHP if($view == "mutasi_piutang"){ echo "class='active'"; } ?> ><a href="<?=base_url();?>lap_mutasi_piutang_c"><i class=" icon-book"></i> Daftar Mutasi Piutang </a></li>
@@ -1147,12 +1141,6 @@ $dt_pengajuan_sub_kode_grup = $this->master_model_m->get_data_pengajuan_sub_kode
                           <?PHP } ?>
 
                 <li <?PHP if($view == "neraca_lajur"){ echo "class='active'"; } ?> ><a href="<?=base_url();?>lap_neraca_lajur_c"> Laporan Neraca Lajur</a></li>
-
-                <li <?PHP if($view == "lap_rpb"){ echo "class='active'"; } ?> ><a href="<?=base_url();?>lap_realisasi_pendapatan_biaya_c"> Realisasi Pend. dan Biaya</a></li>
-                <li <?PHP if($view == "lap_rku"){ echo "class='active'"; } ?> ><a href="<?=base_url();?>lap_rku_c"> Ringkasan Keuangan </a></li>
-                <li <?PHP if($view == "lap_hutang"){ echo "class='active'"; } ?> ><a href="<?=base_url();?>lap_hutang_c"> Laporan Rincian Hutang </a></li>
-                <li <?PHP if($view == "lap_pendapatan"){ echo "class='active'"; } ?> ><a href="<?=base_url();?>lap_hasil_pendapatan_c"> Laporan Hasil Pendapatan </a></li>
-                <li <?PHP if($view == "lap_realisasi_rkp"){ echo "class='active'"; } ?> ><a href="<?=base_url();?>lap_realisasi_rkp_c"> Realisasi Pelaksanaan RKP </a></li>
                 <li <?PHP if($view == "mutasi_hutang"){ echo "class='active'"; } ?> ><a href="<?=base_url();?>lap_mutasi_hutang_c"> Daftar Mutasi Hutang </a></li>
                 <li <?PHP if($view == "mutasi_piutang"){ echo "class='active'"; } ?> ><a href="<?=base_url();?>lap_mutasi_piutang_c"> Daftar Mutasi Piutang </a></li>
             </ul>

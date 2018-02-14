@@ -7,7 +7,6 @@ header("Content-Disposition: attachment; filename=Laporan_neraca_lajur.xls");
 
 <style>
 .gridth {
-    background: #388ed1;
     vertical-align: middle;
     color : #FFF;
     text-align: center;
@@ -38,20 +37,12 @@ table th {
     height: 35px;
     padding: 10px;
     vertical-align: middle;
-    background: #388ed1;
     font-size: 17px;
 }
 
 </style>
 
 <table cellspacing="0"> 
-    <tr>
-        <td align="left" >
-            <h5>
-               PT. PRIMA ELEKTRIK POWER <br>    
-            </h5>
-        </td>
-    </tr>
     <tr>
         <td align="center" colspan="2">
             <h4>
@@ -69,8 +60,8 @@ table th {
         <td style="vertical-align:top;">
             <table align="center" class="grid">
                 <tr>
-                    <th style='text-align:center;' class='kolom_header'> NOMOR </th>
-                    <th style='text-align:center;' class='kolom_header'> PERKIRAAN </th>
+                    <th style='text-align:center;' class='kolom_header' rowspan="2"> NOMOR AKUN </th>
+                    <th style='text-align:center;' class='kolom_header' rowspan="2"> PERKIRAAN </th>
                     <th style='text-align:center;' class='kolom_header' colspan="2"> NERACA AWAL </th>
                     <th style='text-align:center;' class='kolom_header' colspan="2"> NERACA MUTASI</th>
                     <th style='text-align:center;' class='kolom_header' colspan="2"> JURNAL MEMORIAL</th>
@@ -79,8 +70,6 @@ table th {
                 </tr>
 
                 <tr>
-                    <th style='text-align:center;' class='kolom_header'>AKUN</th>
-                    <th style='text-align:center;' class='kolom_header'></th>
 
                     <th style='text-align:center;' class='kolom_header'>DEBET</th>
                     <th style='text-align:center;' class='kolom_header'>KREDIT</th>

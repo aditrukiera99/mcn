@@ -2,7 +2,6 @@
 
 <style>
 .gridth {
-    background: #1793d1;
     vertical-align: middle;
     color : #FFF;
     text-align: center;
@@ -10,7 +9,6 @@
     font-size: 14px;
 }
 .gridtd {
-    background: #FFFFF0;
     vertical-align: middle;
     font-size: 14px;
     height: 30px;
@@ -36,28 +34,15 @@ table th {
     height: 5px;
     padding:5px;
     vertical-align: middle;
-    background: #388ed1;
 }
 
 </style>
-
-
-<table cellspacing="0" align="left"> 
-    <tr>
-        <td align="left" >
-            <h5>
-                PT. Prima Elektrik Power <br>   
-            </h5>
-        </td>
-    </tr>
-</table>
 
 <table cellspacing="0" align="center"> 
     <tr>
         <td align="center">
             <h4>
                 LAPORAN NERACA <br>
-                UNIT : <?=strtoupper($dt_unit->NAMA_UNIT);?><br>
                 <?PHP if($filter == "Bulanan"){ ?>
                 PER <?=strtoupper($bulan_txt);?> <?=$tahun;?>
                 <?PHP } else { ?>

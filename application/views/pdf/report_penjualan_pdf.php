@@ -7,16 +7,16 @@ $base_url2 .=  str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT
 
 <style>
 .gridth {
-    background: #1793d1;
+    background: #FFF;
     vertical-align: middle;
     color : #FFF;
     text-align: center;
     height: 30px;
-    font-size: 15px;
+    font-size: 13px;
 }
 .gridtd {
     vertical-align: middle;
-    font-size: 14px;
+    font-size: 12px;
     height: 15px;
     padding-left: 5px;
     padding-right: 5px;
@@ -36,10 +36,13 @@ table th {
 
 .kolom_header{
     height: 30px;
-    background: #388ed1;
     padding-left: 5px;
     padding-right: 5px;
-    font-size: 14px;
+    font-size: 12px;
+}
+
+.subtotal{
+    border-top: 1px solid black;
 }
 
 </style>
@@ -49,18 +52,6 @@ table th {
     $old_voc = "";
 ?>
 
-<table cellspacing="0" align="left"> 
-    <tr align="center">
-        <td align="left">
-            <h5>
-                PT. Prima Elektrik Power <br> <br>
-                DIVISI <?=strtoupper($dt_unit->NAMA_UNIT);?>    
-            </h5>
-        </td>
-    </tr>
-</table>
-
-<hr>
 
 <table align="center">
     <tr>
@@ -76,19 +67,21 @@ table th {
 <table align="center" class="grid">
     <tr>
         <th style='vertical-align: middle; text-align:center; width:5%;' class='kolom_header'> NO </th>
-        <th style='vertical-align: middle; text-align:center; width:10%;' class='kolom_header'> TANGGAL </th>
-        <th style='vertical-align: middle; text-align:center; width:10%;' class='kolom_header'> INVOICE </th>
-        <th style='vertical-align: middle; text-align:center; width:10%;' class='kolom_header'> NAMA BARANG </th>
+        <th style='vertical-align: middle; text-align:center; width:5%;' class='kolom_header'> TANGGAL </th>
+        <th style='vertical-align: middle; text-align:center; width:5%;' class='kolom_header'> NO. TRANSAKSI  </th>
+        <th style='vertical-align: middle; text-align:center; width:15%;' class='kolom_header'> NAMA BARANG </th>
         <th style='vertical-align: middle; text-align:center; width:10%;' class='kolom_header'> PELANGGAN </th>
-        <th style='vertical-align: middle; text-align:center; width:10%;' class='kolom_header'> JUMLAH </th>
-        <th style='vertical-align: middle; text-align:center; width:10%;' class='kolom_header'> TOT NILAI </th>
-        <th style='vertical-align: middle; text-align:center; width:10%;' class='kolom_header'> TOT HPP </th>
-        <th style='vertical-align: middle; text-align:center; width:10%;' class='kolom_header'> LABA KTR </th>
-        <th style='vertical-align: middle; text-align:center; width:10%;' class='kolom_header'> % </th>
+        <th style='vertical-align: middle; text-align:center; width:10%;' class='kolom_header'> VOLUME </th>
+        <th style='vertical-align: middle; text-align:center; width:10%;' class='kolom_header'> HARGA SATUAN </th>
+        <th style='vertical-align: middle; text-align:center; width:10%;' class='kolom_header'> TOTAL NILAI </th>
+        <th style='vertical-align: middle; text-align:center; width:10%;' class='kolom_header'> TOTAL HPP </th>
+        <th style='vertical-align: middle; text-align:center; width:10%;' class='kolom_header'> LABA KOTOR </th>
+        <th style='vertical-align: middle; text-align:center; width:5%;' class='kolom_header'> % </th>
     </tr>
     <?PHP 
     $no = 0;
     echo "<tr>" ;
+        echo "<td class='gridtd' style='text-align:center;'></td>" ;
         echo "<td class='gridtd' style='text-align:center;'></td>" ;
         echo "<td class='gridtd' style='text-align:center;'></td>" ;
         echo "<td class='gridtd' style='text-align:center;'></td>" ;
@@ -110,17 +103,17 @@ table th {
     $tot_prosen = 0;
 
     foreach ($data as $key => $row) {
-        $subtotal += $row->TOTAL;
+        $subtotal += $row->QTY * $row->HARGA_JUAL;
         $no++;   
 
-        $hpp = $row->QTY * $row->HARGA_BELI;
-        $laba_kotor = $row->TOTAL - $hpp;
+        $hpp = $row->QTY * $row->MODAL;
+        $laba_kotor = ($row->QTY * $row->HARGA_JUAL) - $hpp;
 
         $prosen = ($laba_kotor / $hpp) * 100;
         $prosen_txt = number_format((float)$prosen, 2, '.', '');
 
         $tot_qty += $row->QTY;
-        $tot_nilai += $row->TOTAL;
+        $tot_nilai += $row->QTY * $row->HARGA_JUAL;
         $tot_hpp += $hpp;
         $tot_laba += $laba_kotor;
         $tot_prosen += $prosen;
@@ -131,10 +124,11 @@ table th {
                 echo "<td class='gridtd' style='text-align:left;'>".$row->NO_BUKTI."</td>" ;
                 echo "<td class='gridtd' style='text-align:left;'>".$row->NAMA_PRODUK."</td>" ; 
                 echo "<td class='gridtd' style='text-align:left;'>".$row->PELANGGAN."</td>" ; 
-                echo "<td class='gridtd' style='text-align:center;'>".$row->QTY."</td>" ;                 
-                echo "<td class='gridtd' style='text-align:right;'>".format_akuntansi($row->TOTAL)."</td>" ; 
-                echo "<td class='gridtd' style='text-align:right;'>".format_akuntansi($hpp)."</td>" ; 
-                echo "<td class='gridtd' style='text-align:right;'>".format_akuntansi($laba_kotor)."</td>" ; 
+                echo "<td class='gridtd' style='text-align:center;'>".number_format($row->QTY)." ".$row->SATUAN."</td>" ;                 
+                echo "<td class='gridtd' style='text-align:right;'>Rp ".format_akuntansi($row->HARGA_JUAL)."</td>" ; 
+                echo "<td class='gridtd' style='text-align:right;'>Rp ".format_akuntansi($row->QTY * $row->HARGA_JUAL)."</td>" ; 
+                echo "<td class='gridtd' style='text-align:right;'>Rp ".format_akuntansi($hpp)."</td>" ; 
+                echo "<td class='gridtd' style='text-align:right;'>Rp ".format_akuntansi($laba_kotor)."</td>" ; 
                 echo "<td class='gridtd' style='text-align:center;'>".$prosen_txt."%</td>" ; 
             echo "</tr>" ; 
 
@@ -144,26 +138,26 @@ table th {
 
     <?PHP 
     echo "<tr>" ;
-        echo "<td class='gridtd' style='text-align:center;'></td>" ;
-        echo "<td class='gridtd' style='text-align:center;'></td>" ;
-        echo "<td class='gridtd' style='text-align:center;'></td>" ;
-        echo "<td class='gridtd' style='text-align:center;'></td>" ;
-        echo "<td class='gridtd' style='text-align:center;'></td>" ;
-        echo "<td class='gridtd' style='text-align:center;'></td>" ;
-        echo "<td class='gridtd' style='text-align:center;'></td>" ;
-        echo "<td class='gridtd' style='text-align:center;'></td>" ;
-        echo "<td class='gridtd' style='text-align:center;'></td>" ;
-        echo "<td class='gridtd' style='text-align:center;'></td>" ;
+        echo "<td class='' style='border: 1px solid #000 !important; text-align:center;'></td>" ;
+        echo "<td class='' style='border: 1px solid #000 !important; text-align:center;'></td>" ;
+        echo "<td class='' style='border: 1px solid #000 !important; text-align:center;'></td>" ;
+        echo "<td class='' style='border: 1px solid #000 !important; text-align:center;'></td>" ;
+        echo "<td class='' style='border: 1px solid #000 !important; text-align:center;'></td>" ;
+        echo "<td class='' style='border: 1px solid #000 !important; text-align:center;'></td>" ;
+        echo "<td class='' style='border: 1px solid #000 !important; text-align:center;'></td>" ;
+        echo "<td class='' style='border: 1px solid #000 !important; text-align:center;'></td>" ;
+        echo "<td class='' style='border: 1px solid #000 !important; text-align:center;'></td>" ;
+        echo "<td class='' style='border: 1px solid #000 !important; text-align:center;'></td>" ;
+        echo "<td class='' style='border: 1px solid #000 !important; text-align:center;'></td>" ;
     echo "</tr>" ;
     ?>
 
     <tr>
-        <th style='text-align:center;' class='kolom_header' colspan="5"> </th>
-        <th style='text-align:center;' class='kolom_header'><b><?=$tot_qty;?></b></th>
-        <th style='text-align:right;' class='kolom_header'><b><?=format_akuntansi($tot_nilai);?></b></th>
-        <th style='text-align:right;' class='kolom_header'><b><?=format_akuntansi($tot_hpp);?></b></th>
-        <th style='text-align:right;' class='kolom_header'><b><?=format_akuntansi($tot_laba);?></b></th>
-        <th style='text-align:center;' class='kolom_header'><b><?=number_format((float)$tot_prosen, 2, '.', '');?>%</b></th>
+        <th style='border: 1px solid #000 !important; text-align:center;' class='kolom_header'  colspan="7">SUBTOTAL</th>
+        <th style='border: 1px solid #000 !important; text-align:right;' class='kolom_header'><b>Rp <?=format_akuntansi($tot_nilai);?></b></th>
+        <th style='border: 1px solid #000 !important; text-align:right;' class='kolom_header'><b>Rp <?=format_akuntansi($tot_hpp);?></b></th>
+        <th style='border: 1px solid #000 !important; text-align:right;' class='kolom_header'><b>Rp <?=format_akuntansi($tot_laba);?></b></th>
+        <th style='border: 1px solid #000 !important; text-align:center;' class='kolom_header'><b> <?=number_format((float)$tot_prosen, 2, '.', '');?>%</b></th>
     </tr>
 </table>
 
@@ -201,7 +195,7 @@ table th {
     $height_in_inches = $height_custom;
     $width_in_mm = $width_in_inches * 17.4;
     $height_in_mm = $height_in_inches * 22.4;
-    $html2pdf = new HTML2PDF('L','A4','en');
+    $html2pdf = new HTML2PDF('L','A3','en');
     $html2pdf->pdf->SetTitle('Laporan Penjualan');
     $html2pdf->WriteHTML($content, isset($_GET['vuehtml']));
     $html2pdf->Output('Laporan_penjualan.pdf');

@@ -10,7 +10,6 @@ $base_url2 .=  str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT
 
 <style>
 .gridth {
-    background: #1793d1;
     vertical-align: middle;
     color : #FFF;
     text-align: center;
@@ -18,7 +17,6 @@ $base_url2 .=  str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT
     font-size: 14px;
 }
 .gridtd {
-    background: #FFFFF0;
     vertical-align: middle;
     font-size: 14px;
     height: 30px;
@@ -26,7 +24,6 @@ $base_url2 .=  str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT
     padding-right: 5px;
 }
 .grid {
-    background: #FAEBD7;
     border-collapse: collapse;
 }
 
@@ -49,8 +46,6 @@ $base_url2 .=  str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT
                 Laporan Buku Besar <br>
                 <?=$judul;?>
             </h3>
-
-            <h2 style="margin-top:-10px;"> <?=$dt_unit->NAMA_UNIT;?> </h2>
         </td>
     </tr>
 </table>

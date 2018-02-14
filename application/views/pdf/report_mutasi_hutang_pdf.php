@@ -48,19 +48,6 @@ table th {
     $old_voc = "";
 ?>
 
-<table cellspacing="0" align="left"> 
-    <tr align="center">
-        <td align="left">
-            <h5>
-                PT. Prima Elektrik Power <br> <br>
-                DIVISI <?=strtoupper($dt_unit->NAMA_UNIT);?>    
-            </h5>
-        </td>
-    </tr>
-</table>
-
-<hr>
-
 <table align="center">
     <tr>
         <td align="center">
@@ -77,7 +64,7 @@ table th {
     </tr>
 </table>
 
-<table align="center" class="grid">
+<table align="center" class="grid" style="width: 100%;">
     <tr>
         <th style='text-align:center;' class='kolom_header'> NO </th>
         <th style='text-align:center;' class='kolom_header'> NAMA PBF </th>
@@ -143,7 +130,7 @@ table th {
     $height_in_inches = $height_custom;
     $width_in_mm = $width_in_inches * 17.4;
     $height_in_mm = $height_in_inches * 22.4;
-    $html2pdf = new HTML2PDF('L','A4','en');
+    $html2pdf = new HTML2PDF('P','A4','en');
     $html2pdf->pdf->SetTitle('Laporan Mutasi Hutang');
     $html2pdf->WriteHTML($content, isset($_GET['vuehtml']));
     $html2pdf->Output('Laporan_mutasi_hutang.pdf');

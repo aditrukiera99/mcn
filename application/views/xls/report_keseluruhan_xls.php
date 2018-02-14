@@ -57,11 +57,9 @@ table th {
     </tr>
 </table>
 <br>
-<br>
 
-<br>
 <div>
-<table style="border-collapse: collapse;border:1px solid black;">
+<table style="border-collapse: collapse;border:1px solid black;" align="center">
     
         <tr>
             <th style="padding: 5px 5px 5px 5px; " align="center">Tanggal</th>
@@ -78,26 +76,33 @@ table th {
             <th style="padding: 5px 5px 5px 5px; " align="center">Profit</th>
             <th style="padding: 5px 5px 5px 5px; " align="center">Tempo</th>
             <th style="padding: 5px 5px 5px 5px; " align="center">Ket</th>
-            
         </tr>
+        <?PHP foreach ($data as $key => $row) { 
+            $jatuh_tempo = $row->JATUH_TEMPO + 1;
+        ?>
         <tr>
-            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="center">08-01-2018</td>
-            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="center">No.Do</td>
-            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="center">N 2819 CA</td>
-            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="center">Aditya</td>
-            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="center">CV. ADITAMA CENTRA</td>
-            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="center">5000</td>
-            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="center">Rp.5.000</td>
-            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="center">Rp.4.700</td>
-            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="center">Rp.5.000</td>
-            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="center">Non</td>
-            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="center">300</td>
-            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="center">100</td>
-            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="center">Ket</td>
-            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="center">Tempo</td>
-            
+            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="center"><?=$row->TGL_TRX;?></td>
+            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="center"><?=$row->NO_DO;?></td>
+            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="center"><?=$row->NO_POL;?></td>
+            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="center"><?=$row->BROKER;?></td>
+            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="left"><?=$row->PELANGGAN;?></td>
+            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="center"><?=number_format($row->QTY);?> <?=$row->SATUAN;?></td>
+            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="right">Rp <?=number_format($row->MODAL);?></td>
+            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="right">Rp <?=number_format($row->HARGA_JUAL);?></td>
+            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="right">Rp <?=number_format($row->HARGA_INVOICE);?></td>
+            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="center">
+                <?PHP if($row->PAJAK == "PPN") {
+                    echo "PPN";
+                } else {
+                    echo "Non";
+                }?>
+            </td>
+            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="right">Rp <?=number_format($row->CASHBACK);?></td>
+            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="right">Rp <?=number_format($row->PROFIT);?></td>
+            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="center"><?=$row->JATUH_TEMPO;?> Hari</td>
+            <td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="center"><?PHP echo date('d-m-Y', strtotime($row->TGL_TRX. ' + '.$jatuh_tempo.' days')); ?></td>
         </tr>
-        
+        <?PHP } ?>
         
 </table>
 </div>

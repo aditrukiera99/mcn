@@ -7,7 +7,6 @@ $base_url2 .=  str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT
 
 <style>
 .gridth {
-    background: #1793d1;
     vertical-align: middle;
     color : #FFF;
     text-align: center;
@@ -41,22 +40,11 @@ table th {
     height: 5px;
     padding:5px;
     vertical-align: middle;
-    background: #388ed1;
 }
 
 </style>
 
 
-<table align="center" style="width:100%;">
-    <tr>
-        <td align="center" >
-            <h5>
-                PT. Prima Elektrik Power <br>
-                <u>Divisi <?=strtoupper($dt_unit->NAMA_UNIT);?></u>
-            </h5>
-        </td>
-    </tr>
-</table>
 
 <table align="center" style="width:100%;">
     <tr>
@@ -70,9 +58,9 @@ table th {
 
 <table align="center" class="grid">
     <tr>
-        <th style='text-align:center;' class='kolom_header'> NO </th>
-        <th style='text-align:center;' class='kolom_header'> PERKIRAAN </th>
-        <th style='text-align:center;' class='kolom_header'> TARGET <?=$tahun;?></th>
+        <th style='text-align:center;' class='kolom_header' rowspan="2"> NO </th>
+        <th style='text-align:center;' class='kolom_header' rowspan="2"> PERKIRAAN </th>
+        <th style='text-align:center;' class='kolom_header' rowspan="2"> TARGET <?=$tahun;?></th>
         <th style='text-align:center;' class='kolom_header' colspan="2"> S/D BULAN LALU</th>
         <th style='text-align:center;' class='kolom_header' colspan="2"> BULAN LAPOR</th>
         <th style='text-align:center;' class='kolom_header' colspan="2"> S/D BULAN INI</th>
@@ -81,9 +69,6 @@ table th {
     </tr>
 
     <tr>
-        <th style='text-align:center;' class='kolom_header'></th>
-        <th style='text-align:center;' class='kolom_header'></th>
-        <th style='text-align:center;' class='kolom_header'></th>
         <th style='text-align:center;' class='kolom_header'>RKP</th>
         <th style='text-align:center;' class='kolom_header'>REALISASI</th>
         <th style='text-align:center;' class='kolom_header'>RKP</th>
