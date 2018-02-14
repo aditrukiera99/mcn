@@ -34,6 +34,8 @@ class Stock_c extends CI_Controller {
 			$this->cetak_xls();
 		}
 
+		$data_supplier = $this->model->get_data_supplier();
+
 		$data =  array(
 			'page' => "stock_v", 
 			'title' => "Stock", 
