@@ -48,7 +48,7 @@ class Transaksi_penjualan_m extends CI_Model
         WHERE ID_PENJUALAN = '$id'
         ";
 
-        return $this->db->query($sql)->row();
+        return $this->db->query($sql)->result();
     }
 
     function hapus_voucher($id_klien, $no_voc){
@@ -396,6 +396,43 @@ class Transaksi_penjualan_m extends CI_Model
         $this->db->query($sql);
     }
 
+    function ubah_penjualan_detail($id,$no_trx, $id_pelanggan, $pelanggan, $alamat_tagih, $kota_tujuan, $no_po, $no_do, $tgl_trx, $keterangan, $jatuh_tempo, $no_pol, $sopir, $alat_angkut, $segel_atas, $segel_bawah, $broker, $temperatur, $density, $flash_point, $water_content, $tgl_do, $tgl_sj, $tgl_inv, $tgl_kwi, $operator){
+         $sql = "
+            UPDATE ak_penjualan_new SET 
+
+                NO_BUKTI = '$no_trx', 
+                ID_PELANGGAN = '$id_pelanggan', 
+                PELANGGAN = '$pelanggan', 
+                ALAMAT_TUJUAN = '$alamat_tagih', 
+                KOTA = '$kota_tujuan', 
+                NO_PO = '$no_po', 
+                NO_DO = '$no_do', 
+                TGL_TRX = '$tgl_trx', 
+                KETERANGAN = '$keterangan', 
+                JATUH_TEMPO = '$jatuh_tempo', 
+                NO_POL = '$no_pol', 
+                SOPIR = '$sopir', 
+                ALAT_ANGKUT = '$alat_angkut', 
+                SEGEL_ATAS = '$segel_atas', 
+                SEGEL_BAWAH = '$segel_bawah', 
+                BROKER = '$broker', 
+                TEMPERATUR = '$temperatur', 
+                DENSITY = '$density', 
+                FLASH_POINT = '$flash_point', 
+                WATER_CONTENT = '$water_content', 
+                TGL_DO = '$tgl_do', 
+                TGL_SJ = '$tgl_sj', 
+                TGL_INV = '$tgl_inv', 
+                TGL_KWI = '$tgl_kwi', 
+                OPERATOR ='$operator' 
+
+            WHERE ID = $id
+
+        ";
+
+        $this->db->query($sql);
+    }
+
     function get_id_penjualan($id_klien, $no_trx){
         $sql = "
         SELECT * FROM ak_penjualan WHERE ID_KLIEN = $id_klien AND NO_BUKTI = '$no_trx'
@@ -444,6 +481,46 @@ class Transaksi_penjualan_m extends CI_Model
         ";
 
         $this->db->query($sql);
+    }
+
+    function ubah_detail_penjualan($id_penjualan, $id_produk, $kode_akun, $nama_produk, $qty, $harga_modal, $harga_jual, $harga_invoice, $tax, $cashback, $profit){
+        $qty            = str_replace(',', '', $qty);
+        $harga_modal    = str_replace(',', '', $harga_modal);
+        $harga_jual     = str_replace(',', '', $harga_jual);
+        $harga_invoice  = str_replace(',', '', $harga_invoice);
+
+        $sql = "
+        INSERT INTO ak_penjualan_new_detail 
+        (
+            ID_PENJUALAN,
+            KODE_AKUN,
+            ID_PRODUK,
+            NAMA_PRODUK,
+            QTY,
+            MODAL,
+            HARGA_JUAL,
+            HARGA_INVOICE,
+            PAJAK,
+            CASHBACK,
+            PROFIT
+        )
+        VALUES 
+        (
+        '$id_penjualan',
+        '$kode_akun', 
+        '$id_produk', 
+        '$nama_produk', 
+        '$qty', 
+        '$harga_modal', 
+        '$harga_jual', 
+        '$harga_invoice', 
+        '$tax', 
+        '$cashback', 
+        '$profit'
+        )
+        ";
+
+         $this->db->query($sql);
     }
 
     function simpan_piutang($id_klien, $no_trx, $tgl_trx, $total_all, $tipe){

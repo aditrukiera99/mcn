@@ -88,6 +88,67 @@ class Transaksi_penjualan_c extends CI_Controller {
 
 		}
 
+		if($this->input->post('edit_cui')){
+			$msg = 1;
+
+			$id 	       = $this->input->post('id_pp');
+			$no_trx 	   = $this->input->post('no_trx');
+			$no_trx2       = $this->input->post('no_trx2');
+			$id_pelanggan  = $this->input->post('pelanggan_sel');
+			$pelanggan     = $this->input->post('pelanggan');
+			$alamat_tagih  = $this->input->post('alamat_tagih');
+			$kota_tujuan   = $this->input->post('kota_tujuan');
+			$no_po         = $this->input->post('no_po');
+			$no_do         = $this->input->post('no_do');
+			$tgl_trx 	   = $this->input->post('tgl_trx');
+			$keterangan    = $this->input->post('memo_lunas');
+			$jatuh_tempo   = $this->input->post('jatuh_tempo');
+			$no_pol        = $this->input->post('no_pol');
+			$sopir 		   = $this->input->post('sopir');
+			$alat_angkut   = $this->input->post('alat_angkut');
+			$segel_atas    = $this->input->post('segel_atas');
+			$segel_bawah   = $this->input->post('segel_bawah');
+			$broker        = $this->input->post('broker');
+
+			$temperatur    = $this->input->post('temperatur');
+			$density       = $this->input->post('density');
+			$flash_point   = $this->input->post('flash_point');
+			$water_content = $this->input->post('water_content');
+
+			$tgl_do        = $this->input->post('tgl_trx');
+			$tgl_sj        = $this->input->post('tgl_trx');
+			$tgl_inv       = $this->input->post('tgl_trx');
+			$tgl_kwi       = $this->input->post('tgl_trx');	
+			$operator      = $user->NAMA;
+			$id_penjualan  = $this->input->post('id_pnj');
+
+			$this->model->ubah_penjualan_detail($id,$no_trx, $id_pelanggan, $pelanggan, $alamat_tagih, $kota_tujuan, $no_po, $no_do, $tgl_trx, $keterangan, $jatuh_tempo, $no_pol, $sopir, $alat_angkut, $segel_atas, $segel_bawah, $broker, $temperatur, $density, $flash_point, $water_content, $tgl_do, $tgl_sj, $tgl_inv, $tgl_kwi, $operator);
+
+			
+			$id_produk 	    = $this->input->post('produk');
+			$kode_akun 	 	= $this->input->post('kode_akun');
+			$nama_produk 	= $this->input->post('nama_produk');
+			$qty 	        = $this->input->post('qty');
+
+			$harga_modal    = $this->input->post('harga_modal');
+			$harga_jual     = $this->input->post('harga_jual');
+			$harga_invoice  = $this->input->post('harga_invoice');
+			$tax 	        = $this->input->post('tax');
+			$cashback 	    = $this->input->post('cashback');
+			$profit 	    = $this->input->post('profit');
+
+			$this->model->hapus_detail_trx($id);
+
+			foreach ($id_produk as $key => $val) {
+				$this->model->ubah_detail_penjualan($id_penjualan, $val, $kode_akun[$key], $nama_produk[$key], $qty[$key], $harga_modal[$key], $harga_jual[$key], $harga_invoice[$key], $tax[$key], $cashback[$key], $profit[$key]);
+			}
+
+			$this->master_model_m->simpan_log($id_user, "Mengubah transaksi penjualan dengan nomor transaksi : <b>".$no_trx."</b>");
+		}
+
+		
+
+
 		if($this->input->post('cari')){
 			$tgl_full = $this->input->post('tgl');
 			$tgl = explode(' sampai ', $tgl_full);
@@ -188,46 +249,7 @@ class Transaksi_penjualan_c extends CI_Controller {
 		$get_pajak = $this->model->get_pajak($id_klien);
 		$get_pel_sup = $this->model->get_pel_sup($id_klien);
 
-		if($this->input->post('simpan')){
-			$msg = 1;
-			$id_pelanggan     =   $this->input->post('pelanggan_sel');
-			$pelanggan 	      =   $this->input->post('pelanggan');
-			$alamat_tagih     =   $this->input->post('alamat_tagih');
-			$tgl_trx          =   $this->input->post('tgl_trx');
-			$tgl_jatuh_tempo  =   "";
-			$no_trx           =   $this->input->post('no_trx');
-			$no_trx2          =   $this->input->post('no_trx2');
-			$id_pajak         =   $this->input->post('id_pajak');
-			$sub_total        =   str_replace(',', '', $this->input->post('sub_total'));
-			$pajak_total      =   str_replace(',', '', $this->input->post('pajak_all'));
-			$total_all        =   str_replace(',', '', $this->input->post('total_all'));
-			$sts_lunas        =   $this->input->post('sts_lunas');
-			$akun_piutang     =   $this->input->post('akun_piutang');
-			$kode_akun_pajak  =   $this->input->post('kode_akun_pajak');
-			$memo_lunas       =   addslashes($this->input->post('memo_lunas'));
-
-			if($sts_lunas == 1){
-				$akun_piutang = "";
-			}
-
-			$this->model->ubah_penjualan($id, $no_trx, $id_pelanggan, $pelanggan, $alamat_tagih, $tgl_trx, $tgl_jatuh_tempo, $id_pajak, $sub_total, $pajak_total, $total_all, $sts_lunas, $memo_lunas, $akun_piutang, $kode_akun_pajak);
 		
-			$nama_produk 	= $this->input->post('nama_produk');
-			$qty 	        = $this->input->post('qty');
-			$satuan 		= $this->input->post('satuan');
-			$harga_satuan 	= $this->input->post('harga_satuan');
-			$jumlah 	 	= $this->input->post('jumlah');
-			$kode_akun 	 	= $this->input->post('kode_akun');
-
-			$this->model->hapus_detail_trx($id);
-
-			foreach ($nama_produk as $key => $val) {
-				$this->model->simpan_detail_penjualan($id, $id_klien, $val, $qty[$key], $satuan[$key], $harga_satuan[$key], $jumlah[$key], $kode_akun[$key]);
-			}
-
-			$this->master_model_m->simpan_log($id_user, "Mengubah transaksi penjualan dengan nomor transaksi : <b>".$no_trx."</b>");
-		}
-
 		$dt = $this->model->get_data_trx($id);
 		$dt_detail = $this->model->get_data_trx_detail($id);
 
