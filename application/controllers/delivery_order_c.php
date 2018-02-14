@@ -43,6 +43,9 @@ class Delivery_order_c extends CI_Controller {
 		
 		}
 
+		
+
+
 		$data =  array(
 			'page' => "delivery_order_v", 
 			'title' => "Delivery Order",  
@@ -182,6 +185,8 @@ class Delivery_order_c extends CI_Controller {
 
 		echo json_encode($dt);
 	}
+
+	
 
 	function get_produk_popup(){
 		$sess_user = $this->session->userdata('masuk_akuntansi');

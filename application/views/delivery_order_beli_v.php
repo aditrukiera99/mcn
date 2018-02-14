@@ -74,18 +74,11 @@
 							<tr>
 								<td align="center">
 									<a target="blank" href="<?=base_url();?>delivery_order_c/cetak/<?=$row->ID;?>" class="btn btn-info" type="button" style="font-size: 15px; padding-right: 8px;"><i class="icon-print"></i></a>						
-									<button class="btn btn-warning" onclick="$('#tgl').val('<?=$row->TGL_DO;?>'); $('#id_lapor').val(<?=$row->ID;?>);" data-toggle="modal" data-target="#modal_edit" style="font-size: 15px; padding-right: 8px;"><i class="icon-edit"></i></button>						
+									<a class="btn btn-warning" href="<?=base_url();?>delivery_order_beli_c/ubah_data/<?=$row->ID;?>" style="font-size: 15px; padding-right: 8px;"><i class="icon-edit"></i></a>						
 								</td>
 								<td style="font-size:14px; text-align:center; vertical-align:middle;">   <?=$row->NO_BUKTI;?> </td>
 								<td style="font-size:14px; text-align:center; vertical-align:middle;"> 
-									<?PHP 
-									$bulan_kas = date("m",strtotime($row->TGL_TRX));
-									$bulan_kas = tgl_to_romawi($bulan_kas);
-									$tahun_kas = date("Y",strtotime($row->TGL_TRX));
-
-									$no_bukti_real = $row->NO_BUKTI."/DO/MCN.PAS/".$bulan_kas."/".$tahun_kas;
-									echo $no_bukti_real;
-									?>
+									<?=$row->NO_DO;?>
 								 </td>
 								<td style="font-size:14px; text-align:left; vertical-align:middle;">   <?=$row->TGL_DO;?> </td>
 								<td style="font-size:14px; text-align:left; vertical-align:middle;">   <?=$row->PELANGGAN;?> </td>

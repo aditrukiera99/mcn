@@ -105,9 +105,8 @@ if($last_cc->KODE_AKUN != "" || $last_cc->KODE_AKUN != null ){
 							<th align="center"> No Polisi </th>
 							<th align="center"> Sopir </th>
 							<th align="center"> Volume </th>
-							<th align="center"> Modal </th>
-							<th align="center"> Harga Jual </th>
-							<th align="center"> Harga Invoice </th>
+							<th align="center"> Harga Satuan </th>
+							<th align="center"> Total </th>
 						</tr>						
 					</thead>
 					<tbody id="tes">
@@ -131,7 +130,6 @@ if($last_cc->KODE_AKUN != "" || $last_cc->KODE_AKUN != null ){
 
 								<td style="font-size:14px; text-align:right; vertical-align:middle;"> <?=number_format($dt_detail->QTY);?> </td>
 								<td style="font-size:14px; text-align:right; vertical-align:middle;"> <?=number_format($dt_detail->MODAL);?> </td>
-								<td style="font-size:14px; text-align:right; vertical-align:middle;"> <?=number_format($dt_detail->HARGA_JUAL);?> </td>
 								<td style="font-size:14px; text-align:right; vertical-align:middle;"> <?=number_format($dt_detail->HARGA_INVOICE);?> </td>
 								<!-- <td style="font-size:14px; text-align:center; vertical-align:middle;">
 									<?PHP if($row->NO_TRX_AKUN == "" || $row->NO_TRX_AKUN == null ){ 

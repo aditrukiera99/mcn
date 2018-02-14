@@ -48,6 +48,15 @@ class Purchase_order_m extends CI_Model
         WHERE ID_PENJUALAN = '$id'
         ";
 
+        return $this->db->query($sql)->row();
+    }
+
+    function get_data_trxx_detail($id){
+        $sql = "
+        SELECT * FROM ak_pembelian_new_detail 
+        WHERE ID_PENJUALAN = '$id'
+        ";
+
         return $this->db->query($sql)->result();
     }
 
@@ -59,6 +68,8 @@ class Purchase_order_m extends CI_Model
 
         return $this->db->query($sql)->result();
     }
+
+
 
     function hapus_voucher($id_klien, $no_voc){
         $sql_1 = "
@@ -400,9 +411,48 @@ class Purchase_order_m extends CI_Model
 
     function ubah_penjualan($id, $no_trx, $id_pelanggan, $pelanggan, $alamat_tagih, $tgl_trx, $tgl_jatuh_tempo, $id_pajak, $sub_total, $pajak_total, $total_all, $sts_lunas, $memo_lunas, $akun_piutang, $kode_akun_pajak){
          $sql = "
-            UPDATE ak_penjualan SET ID_PELANGGAN = $id_pelanggan, PELANGGAN = '$pelanggan', ALAMAT = '$alamat_tagih', TGL_TRX = '$tgl_trx', ID_PAJAK = $id_pajak, SUB_TOTAL = $sub_total, NILAI_PAJAK = $pajak_total,
+            UPDATE ak_pembelian_new SET ID_PELANGGAN = $id_pelanggan, PELANGGAN = '$pelanggan', ALAMAT = '$alamat_tagih', TGL_TRX = '$tgl_trx', ID_PAJAK = $id_pajak, SUB_TOTAL = $sub_total, NILAI_PAJAK = $pajak_total,
             TOTAL = $total_all, LUNAS = $sts_lunas, MEMO = '$memo_lunas', KODE_AKUN_PIUTANG = '$akun_piutang', KODE_AKUN_PAJAK = '$kode_akun_pajak'    
             WHERE ID = $id
+
+        ";
+
+        $this->db->query($sql);
+    }
+
+    function ubah_pembelian_new($id,$no_trx, $id_pelanggan, $pelanggan, $alamat_tagih, $kota_tujuan, $no_po, $no_do, $tgl_trx, $keterangan, $jatuh_tempo, $no_pol, $sopir, $alat_angkut, $segel_atas, $segel_bawah, $broker, $temperatur, $density, $flash_point, $water_content, $tgl_do, $tgl_sj, $tgl_inv, $tgl_kwi, $operator,$atas_nama, $transport){
+         $sql = "
+            UPDATE ak_pembelian_new SET 
+
+            NO_BUKTI = '$no_trx' ,
+            ID_PELANGGAN = '$id_pelanggan',
+            PELANGGAN = '$pelanggan',
+            ALAMAT_TUJUAN = '$alamat_tagih',
+            KOTA = '$kota_tujuan',
+            NO_PO = '$no_po',
+            NO_DO = '$no_do',
+            TGL_TRX = '$tgl_trx',
+            KETERANGAN = '$keterangan',
+            JATUH_TEMPO = '$jatuh_tempo',
+            NO_POL = '$no_pol',
+            SOPIR = '$sopir',
+            ALAT_ANGKUT = '$alat_angkut',
+            SEGEL_ATAS = '$segel_atas',
+            SEGEL_BAWAH = '$segel_bawah',
+            BROKER = '$broker',
+            TEMPERATUR = '$temperatur',
+            DENSITY = '$density',
+            FLASH_POINT = '$flash_point',
+            WATER_CONTENT = '$water_content',
+            TGL_DO = '$tgl_do',
+            TGL_SJ = '$tgl_sj',
+            TGL_INV = '$tgl_inv',
+            TGL_KWI = '$tgl_kwi',
+            OPERATOR = '$operator',
+            ATAS_NAMA = '$atas_nama',
+            TRANSPORT = '$transport'
+             
+            WHERE ID = '$id'
 
         ";
 
@@ -438,8 +488,8 @@ class Purchase_order_m extends CI_Model
         VALUES 
         (
         '$id_penjualan',
-        '$id_produk', 
         '$kode_akun', 
+        '$id_produk', 
         '$nama_produk', 
         '$qty', 
         '$harga_modal',  
@@ -478,6 +528,14 @@ class Purchase_order_m extends CI_Model
     function hapus_detail_trx($id){
         $sql = "
         DELETE FROM ak_pembelian_new_detail WHERE ID_PENJUALAN = '$id'
+        ";
+
+        $this->db->query($sql);
+    }
+
+    function hapus_detail_cust($id){
+        $sql = "
+        DELETE FROM ak_pembelian_customer WHERE ID_PEMBELIAN = '$id'
         ";
 
         $this->db->query($sql);

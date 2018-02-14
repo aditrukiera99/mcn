@@ -25,6 +25,7 @@ $bulan_kas = tgl_to_romawi($bulan_kas);
 $tahun_kas = date('Y');
 
 $no_bukti_real = str_pad($no_transaksi, 3, '0', STR_PAD_LEFT)."/PO/MCN/".$bulan_kas."/".$tahun_kas;
+$no_bukti_real2 = str_pad($no_transaksi, 3, '0', STR_PAD_LEFT)."/DO/MCN/".$bulan_kas."/".$tahun_kas;
 
 function tgl_to_romawi($var){
 	if($var == "01"){
@@ -75,6 +76,7 @@ input[type=checkbox]
 
 </style>
 <input id="tr_utama_count" value="1" type="hidden"/>
+<input id="tr_utama_count2" value="1" type="hidden"/>
 <div class="row-fluid ">
 	<div class="span12">
 		<div class="primary-head">
@@ -137,6 +139,7 @@ input[type=checkbox]
 			<div class="controls">
 				<input type="text" class="span8" value="<?=$no_bukti_real;?>" name="no_trx" id="no_trx" style="font-size: 15px;">
 				<input type="hidden" class="span8" value="<?=$no_transaksi;?>" name="no_trx2" id="no_trx2">
+				<input type="hidden" class="span8" value="<?=$no_bukti_real2;?>" name="no_do" id="no_trx2">
 			</div>
 		</div>
 
@@ -198,15 +201,15 @@ input[type=checkbox]
 			</div>
 		</div>
 
-		<div class="control-group" style="margin-left: 10px; ">
+		<!-- <div class="control-group" style="margin-left: 10px; ">
 			<label class="control-label"> <b style="font-size: 14px;"> Segel Atas </b> </label>
 			<div class="controls">
 				<input type="text" class="span8" value="" name="segel_atas" id="segel_atas" style="font-size: 15px;">
 			</div>
-		</div>
+		</div> -->
 
 		<div class="control-group" style="margin-left: 10px; ">
-			<label class="control-label"> <b style="font-size: 14px;"> Segel Bawah </b> </label>
+			<label class="control-label"> <b style="font-size: 14px;"> Segel</b> </label>
 			<div class="controls">
 				<input type="text" class="span8" value="" name="segel_bawah" id="segel_bawah" style="font-size: 15px;">
 			</div>
@@ -215,26 +218,23 @@ input[type=checkbox]
 		<table class="stat-table table table-hover" style="width: 90%;">
 			<thead>
 				<tr>
-					<th align="center" style="width: 5%;"> # </th>
-					<th align="center" style="width: 50%;"> Nama Customer </th>
+					<th align="center" style="width: 5%;"> No </th>
+					<th align="center" style="width: 70%;"> Nama Customer </th>
+					<th align="center" style="width: 20%;"> # </th>
 				</tr>
 			</thead>
 			<tbody id="data_cust">
 				<tr>
 					<td align="center">1</td>
 					<td><input type="text" name="data_cust[]" class="span12"></td>
-				</tr>
-
-				<tr>
-					<td align="center">2</td>
-					<td><input type="text" name="data_cust[]" class="span12"></td>
-				</tr>
-
-				<tr>
-					<td align="center">3</td>
-					<td><input type="text" name="data_cust[]" class="span12"></td>
+					<td></td>
 				</tr>
 			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="3"><button style="margin-bottom: 15px;" onclick="tambah_data2();" type="button" class="btn btn-info"><i class="icon-plus"></i> Tambah Baris Data </button></td>
+				</tr>
+			</tfoot>
 		</table>
 
 
@@ -277,7 +277,7 @@ input[type=checkbox]
 						<tr>
 							<th align="center" style="width: 25%;"> Kode Akun </th>
 							<th align="center" style="width: 20%;"> Produk / Item </th>
-							<th align="center"> Kuantitas </th>
+							<th align="center"> Volume </th>
 							<th align="center"> Harga Satuan </th>
 							<th align="center"> Jumlah </th>
 							<th align="center"> # </th>
@@ -335,7 +335,8 @@ input[type=checkbox]
 
 							<td align="center" style="vertical-align:middle;"> 
 								<div class="controls">
-									<input required onkeyup="FormatCurrency(this);" style="font-size: 18px; text-align:right; width: 80%;" type="text"  value="" name="harga_invoice[]" id="harga_invoice_1">
+									<input required onkeyup="FormatCurrency(this);" style="font-size: 18px; text-align:right; width: 80%;" type="text"  value="" name="harga_invoice2[]" id="harga_invoice_1">
+									<input onkeyup="FormatCurrency(this);" style="font-size: 18px; text-align:right; width: 80%;" type="hidden"  value="" name="harga_invoice[]" id="harga_invoice2_1">
 								</div>
 							</td>
 
@@ -379,7 +380,7 @@ input[type=checkbox]
 					<input type="hidden" name="sts_lunas" id="sts_lunas" value="1" />
 
 					<input type="submit" value="Simpan Pembelian" name="simpan" class="btn btn-success">
-					<button class="btn" onclick="window.location='<?=base_url();?>transaksi_penjualan_c' " type="button"> Batal dan Kembali </button>
+					<button class="btn" onclick="window.location='<?=base_url();?>purchase_order_c' " type="button"> Batal dan Kembali </button>
 					</center>
 				</div>
 			</div>
@@ -719,7 +720,8 @@ function hitung_total(id){
 
 
 	var profit = parseFloat(harga_modal) * parseFloat(qty) ;
-	$('#harga_invoice_'+id).val(profit);
+	$('#harga_invoice_'+id).val('Rp. '+acc_format(profit, ""));
+	$('#harga_invoice2_'+id).val(profit);
 }
 
 function get_produk_detail(id, no_form){
@@ -788,7 +790,8 @@ function tambah_data() {
 
 		'<td align="center" style="vertical-align:middle;"> '+
 			'<div class="controls">'+
-				'<input required onkeyup="FormatCurrency(this);" style="font-size: 18px; text-align:right; width: 80%;" type="text"  value="" name="harga_invoice[]" id="harga_invoice_'+i+'">'+
+				'<input required onkeyup="FormatCurrency(this);" style="font-size: 18px; text-align:right; width: 80%;" type="text"  value="" name="harga_invoice2[]" id="harga_invoice_'+i+'">'+
+				'<input onkeyup="FormatCurrency(this);" style="font-size: 18px; text-align:right; width: 80%;" type="hidden"  value="" name="harga_invoice[]" id="harga_invoice2_'+i+'">'+
 			'</div>'+
 		'</td>'+
 
@@ -801,6 +804,38 @@ function tambah_data() {
 	$('#tr_'+i).find('.cek_select').attr('class', 'cek_select_'+i);
 	$('#tr_utama_count').val(i);
 	$(".cek_select_"+i).chosen();
+
+}
+function tambah_data2() {
+	
+	var jml_tr = $('#tr_utama_count2').val();
+	var i = parseInt(jml_tr) + 1;
+
+	
+
+	$isi_1 = 
+	'<tr id="tr2_'+i+'" class="tr_utama">'+
+		
+		
+		'<td align="center" style="vertical-align:middle;">'+
+			'<div class="controls">'+
+				'<label>'+i+'</label>'+
+			'</div>'+
+		'</td>'+
+
+		'<td align="center" style="vertical-align:middle;"> '+
+			'<div class="controls">'+
+				'<input type="text" name="data_cust[]" class="span12">'+
+			'</div>'+
+		'</td>'+
+
+		'<td class="center" style="background:#FFF; text-align:center;">'+
+			'<button style="width: 100%;" onclick="hapus_row1('+i+');" type="button" class="btn btn-danger"> Hapus </button>'+
+		'</td>'+
+	'</tr>';
+
+	$('#data_cust').append($isi_1);
+	$('#tr_utama_count2').val(i);
 
 }
 
@@ -883,6 +918,10 @@ function hitung_pajak(id_pajak){
 function hapus_row (id) {
 	$('#tr_'+id).remove();
 	hitung_total_semua();
+}
+
+function hapus_row1 (id) {
+	$('#tr2_'+id).remove();
 }
 
 function acc_format(n, currency) {

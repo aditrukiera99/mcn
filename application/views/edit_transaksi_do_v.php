@@ -48,7 +48,6 @@ function tgl_to_romawi($var){
 	 return $var;
 }
 
-$bukti_kas = 'BK/'.$bulan_kas.'/'.$tahun_kas;
 
 
 ?>
@@ -128,9 +127,9 @@ input[type=checkbox]
 		<div class="control-group" style="margin-left: 10px;">
 			<label class="control-label"> <b style="font-size: 14px;"> No. Transaksi </b> </label>
 			<div class="controls">
-				<input type="text" class="span8" value="<?=$dt->NO_BUKTI;?>" name="no_trx" id="no_trx" style="font-size: 15px;">
+				<input type="text" class="span8" value="<?=$dt->NO_DO;?>" name="no_do" id="no_trx" style="font-size: 15px;">
 				<input type="hidden" class="span8" value="<?=$dt->NO_BUKTI;?>" name="no_trx2" id="no_trx2">
-				<input type="hidden" class="span8" value="<?=$dt->NO_DO;?>" name="no_do" id="no_trx2">
+				<input type="hidden" class="span8" value="<?=$dt->NO_BUKTI;?>" name="no_trx" id="no_trx2">
 			</div>
 		</div>
 
@@ -185,7 +184,7 @@ input[type=checkbox]
 			</div>
 		</div>
 
-		<div class="control-group" style="margin-left: 10px; >
+		<div class="control-group" style="margin-left: 10px;" >
 			<label class="control-label"> <b style="font-size: 14px;"> Alat Angkut </b> </label>
 			<div class="controls">
 				<input type="text" class="span8" value="<?=$dt->ALAT_ANGKUT;?>" name="alat_angkut" id="alat_angkut" style="font-size: 15px;">
@@ -211,6 +210,7 @@ input[type=checkbox]
 				</tr>
 			</thead>
 			<tbody id="data_cust">
+				<?PHP $i = 0; ?>
 				<?php foreach ($dt_cust as $key => $value) {
 					$i++;
 					?>

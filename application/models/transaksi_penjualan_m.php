@@ -430,8 +430,8 @@ class Transaksi_penjualan_m extends CI_Model
         VALUES 
         (
         '$id_penjualan',
-        '$id_produk', 
         '$kode_akun', 
+        '$id_produk', 
         '$nama_produk', 
         '$qty', 
         '$harga_modal', 
