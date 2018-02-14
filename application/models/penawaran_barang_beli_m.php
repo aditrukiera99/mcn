@@ -207,7 +207,7 @@ class Penawaran_barang_beli_m extends CI_Model
 
     function get_no_trx_penjualan($id_klien){
         $sql = "
-        SELECT * FROM ak_nomor WHERE ID_KLIEN = $id_klien AND TIPE = 'PENAWARAN'
+        SELECT * FROM ak_nomor WHERE ID_KLIEN = $id_klien AND TIPE = 'PENAWARAN_BELI'
         ";
 
         return $this->db->query($sql)->row();

@@ -663,6 +663,7 @@ $dt_pengajuan_sub_kode_grup = $this->master_model_m->get_data_pengajuan_sub_kode
             <li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-th-large"></i>Pembelian<b class="icon-angle-down"></b></a>
             <div class="dropdown-menu">
               <ul>
+                  <li><a href="<?=base_url();?>penawaran_barang_beli_c"><i class="icon-caret-right "></i> Penawaran Barang </a></li>
                   <li><a href="<?=base_url();?>purchase_order_c"><i class="icon-caret-right "></i> Pembelian </a></li>
                   <li><a href="<?=base_url();?>delivery_order_beli_c"><i class="icon-caret-right "></i> Delivery Order </a></li>
               </ul>
@@ -1016,9 +1017,15 @@ $dt_pengajuan_sub_kode_grup = $this->master_model_m->get_data_pengajuan_sub_kode
 
 
             <div class="tab-pane <?PHP if($master == "pembelian"){ echo "active"; } ?>" id="forms_penerimaan">
-                    <h4 class="side-head">Pembelian / Penerimaan</h4>
-                    <ul id="nav" class="accordion-nav">
-              
+                <h4 class="side-head">Pembelian / Penerimaan</h4>
+                <ul id="nav" class="accordion-nav">
+                
+                <li <?PHP if($view == "penawaran_barang_beli"){ echo "class='active'"; } ?>>
+                  <a href="<?=base_url();?>penawaran_barang_beli_c">
+                    <i class="icon-caret-right"></i> Penawaran Barang <span> Membuat daftar penawaran barang</span>
+                  </a>
+                </li>
+
                 <li <?PHP if($view == "purchase_order"){ echo "class='active'"; } ?>>
                   <a href="<?=base_url();?>purchase_order_c">
                     <i class="icon-caret-right "></i> Pembelian <span> Membuat daftar pembelian / purchase order</span>
@@ -1030,8 +1037,8 @@ $dt_pengajuan_sub_kode_grup = $this->master_model_m->get_data_pengajuan_sub_kode
                     <i class="icon-caret-right "></i> Delivery Order <span> Membuat delivery order pembelian</span>
                   </a>
                 </li>
-            </ul>
-                </div>
+                </ul>
+            </div>
 
               <div class="tab-pane <?PHP if($master == "penjualan"){ echo "active"; } ?>" id="forms_penerimaan_jual">
                 <h4 class="side-head">Penjualan</h4>

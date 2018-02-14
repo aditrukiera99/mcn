@@ -731,7 +731,13 @@ $dt_pengajuan_sub_kode_grup = $this->master_model_m->get_data_pengajuan_sub_kode
   				<div class="tab-pane <?PHP if($master == "pembelian"){ echo "active"; } ?>" id="forms_penerimaan">
   					<h4 class="side-head">Pembelian / Penerimaan</h4>
   					<ul id="nav" class="accordion-nav">
-              
+                
+                <li <?PHP if($view == "penawaran_barang_beli"){ echo "class='active'"; } ?>>
+                  <a href="<?=base_url();?>penawaran_barang_beli_c">
+                    <i class="icon-caret-right"></i> Penawaran Barang <span> Membuat daftar penawaran barang</span>
+                  </a>
+                </li>
+
                 <li <?PHP if($view == "purchase_order"){ echo "class='active'"; } ?>>
                   <a href="<?=base_url();?>purchase_order_c">
                     <i class="icon-caret-right "></i> Pembelian <span> Membuat daftar pembelian / purchase order</span>

@@ -342,7 +342,7 @@ class Penawaran_barang_m extends CI_Model
     }
 
     function simpan_penjualan($id_klien, $no_trx, $id_pelanggan, $pelanggan, $alamat_tagih, $tgl_trx, $tgl_jatuh_tempo, $id_pajak, $sub_total, $pajak_total, 
-                              $total_all, $sts_lunas, $memo_lunas, $akun_piutang, $kode_akun_pajak, $unit, $atas_nama, $ket_penawaran)
+                              $total_all, $sts_lunas, $memo_lunas, $akun_piutang, $kode_akun_pajak, $unit, $atas_nama, $ket_penawaran, $contact_person, $validasi_tgl, $include_ppn)
     {
 
         if($pajak_total == ""){
@@ -351,9 +351,11 @@ class Penawaran_barang_m extends CI_Model
 
         $sql = "
         INSERT INTO ak_penjualan 
-        (ID_KLIEN, NO_BUKTI, ID_PELANGGAN, PELANGGAN, ALAMAT, TGL_TRX, TGL_JATUH_TEMPO, ID_PAJAK, SUB_TOTAL, NILAI_PAJAK, TOTAL, LUNAS, MEMO, KODE_AKUN_PIUTANG, KODE_AKUN_PAJAK, UNIT, TIPE, UP, KETERANGAN_PENAWARAN)
+        (ID_KLIEN, NO_BUKTI, ID_PELANGGAN, PELANGGAN, ALAMAT, TGL_TRX, TGL_JATUH_TEMPO, ID_PAJAK, SUB_TOTAL, NILAI_PAJAK, TOTAL, 
+        LUNAS, MEMO, KODE_AKUN_PIUTANG, KODE_AKUN_PAJAK, UNIT, TIPE, UP, KETERANGAN_PENAWARAN, CONTACT_PERSON, VALIDASI, INCLUDE_PPN
+        )
         VALUES 
-        ($id_klien, '$no_trx', $id_pelanggan, '$pelanggan', '$alamat_tagih', '$tgl_trx', '$tgl_jatuh_tempo', '$id_pajak', '$sub_total', '$pajak_total', '$total_all', '$sts_lunas', '$memo_lunas', '$akun_piutang', '$kode_akun_pajak', '$unit', 'PENAWARAN', '$atas_nama', '$ket_penawaran')
+        ($id_klien, '$no_trx', $id_pelanggan, '$pelanggan', '$alamat_tagih', '$tgl_trx', '$tgl_jatuh_tempo', '$id_pajak', '$sub_total', '$pajak_total', '$total_all', '$sts_lunas', '$memo_lunas', '$akun_piutang', '$kode_akun_pajak', '$unit', 'PENAWARAN', '$atas_nama', '$ket_penawaran', '$contact_person', '$validasi_tgl', '$include_ppn')
         ";
 
         $this->db->query($sql);

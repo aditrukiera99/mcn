@@ -144,7 +144,7 @@ $base_url2 .=  str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT
 		<td style="width: 50%">
 			<table>
 			<tr>
-				<td>Pasuruan, 06 Februari 2018</td>
+				<td>Pasuruan, <?=date('d F Y');?></td>
 			</tr>
 			<tr>
 				<td>Hormat Kami</td>
@@ -185,7 +185,7 @@ $base_url2 .=  str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT
     $width_in_mm = $width_in_inches * 21.4;
     $height_in_mm = $height_in_inches * 19.8;
     $html2pdf = new HTML2PDF('P','A4','en');
-    $html2pdf->pdf->SetTitle('Cetak Purchase Order');
+    $html2pdf->pdf->SetTitle('Penawaran Barang');
     $html2pdf->WriteHTML($content, isset($_GET['vuehtml']));
-    $html2pdf->Output('cetak_purchase_order.pdf');
+    $html2pdf->Output('cetak_penawaran_barang.pdf');
 ?>

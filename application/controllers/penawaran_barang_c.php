@@ -46,6 +46,10 @@ class Penawaran_barang_c extends CI_Controller {
 			$memo_lunas      = addslashes($this->input->post('memo_lunas'));
 			$unit 			 = $this->input->post('unit');
 
+			$contact_person  = $this->input->post('contact_person');
+			$validasi_tgl    = $this->input->post('validasi_tgl');
+			$include_ppn     = $this->input->post('include_ppn');
+
 			$atas_nama 		= addslashes($this->input->post('atas_nama'));
 			$ket_penawaran 	= $this->input->post('ket_penawaran');
 
@@ -53,7 +57,7 @@ class Penawaran_barang_c extends CI_Controller {
 				$akun_piutang = "";
 			}
 
-			$this->model->simpan_penjualan($id_klien, $no_trx, $id_pelanggan, $pelanggan, $alamat_tagih, $tgl_trx, $tgl_jatuh_tempo, $id_pajak, $sub_total, $pajak_total, $total_all, $sts_lunas, $memo_lunas, $akun_piutang, $kode_akun_pajak, $unit, $atas_nama, $ket_penawaran);
+			$this->model->simpan_penjualan($id_klien, $no_trx, $id_pelanggan, $pelanggan, $alamat_tagih, $tgl_trx, $tgl_jatuh_tempo, $id_pajak, $sub_total, $pajak_total, $total_all, $sts_lunas, $memo_lunas, $akun_piutang, $kode_akun_pajak, $unit, $atas_nama, $ket_penawaran, $contact_person, $validasi_tgl, $include_ppn);
 			$id_penjualan = $this->db->insert_id();
 
 			$this->model->save_next_nomor($id_klien, 'PENAWARAN', $no_trx2);
@@ -145,8 +149,8 @@ class Penawaran_barang_c extends CI_Controller {
 			'page' => "buat_penawaran_new_v", 
 			'title' => "Buat Penawaran Baru", 
 			'msg' => "", 
-			'master' => "pembelian", 
-			'view' => "penawaran_barang", 
+			'master' => "penjualan", 
+			'view' => "penawaran_barang_v", 
 			'msg' => $msg, 
 			'list_akun' => $list_akun, 
 			'get_list_akun_all' => $get_list_akun_all, 

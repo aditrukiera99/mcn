@@ -92,7 +92,7 @@ input[type=checkbox]
 
 <div class="breadcrumb" style="background:#E0F7FF;">
 	<div class="row-fluid">
-		<div class="span5">
+		<div class="span4">
 			<div class="control-group">
 				<label class="control-label"> <b style="font-size: 14px;"> Kepada </b> </label>
 				<div class="controls">
@@ -104,6 +104,18 @@ input[type=checkbox]
 				</div>
 			</div>
 		</div>
+
+		<div class="span3">
+			<div class="control-group">
+				<label class="control-label"> <b style="font-size: 14px;"> UP </b> </label>
+				<div class="controls">
+					<div class="input-append">
+						<input type="text" id="atas_nama" name="atas_nama" style="background:#FFF; width: 90%" value="">
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div class="span3">
 			<div class="control-group">
 				<label class="control-label"> <b style="font-size: 14px;"> Divisi </b> </label>
@@ -127,12 +139,6 @@ input[type=checkbox]
 				</div>
 		</div>
 
-		<div class="control-group" style="margin-left: 10px;">
-			<label class="control-label"> <b style="font-size: 14px;"> Up </b> </label>
-			<div class="controls">
-				<input type="text" value="" name="atas_nama" id="atas_nama" style="font-size: 15px;">
-			</div>
-		</div>
 	</div>
 
 
@@ -169,6 +175,43 @@ input[type=checkbox]
 	</div>
 </div>
 
+
+<div class="row-fluid" style="background: #F5EADA; padding-top: 15px; padding-bottom: 15px;">
+	<div class="span4">
+		<div class="control-group" style="margin-left: 10px;">
+			<label class="control-label"> <b style="font-size: 14px;"> Contact Person </b> </label>
+				<div class="controls">
+					<input type="text" class="span12" value="Dede (081234203219)" name="contact_person" id="contact_person" style="font-size: 15px;">
+				</div>
+		</div>
+	</div>
+
+	<div class="span4">
+		<div class="control-group" style="margin-left: 10px;">
+			<label class="control-label"> <b style="font-size: 14px;"> Validasi Penawaran s/d </b> </label>
+				<div class="controls">
+					<div id="datetimepicker2" class="input-append date">
+						<input readonly="" style="width: 80%; background:#FFF;" value="<?=date('d-m-Y');?>" required name="validasi_tgl" data-format="dd-MM-yyyy" type="text">
+						<span class="add-on ">
+							<i class="icon-calendar"></i>
+						</span>
+					</div>
+				</div>
+		</div>
+	</div>
+
+	<div class="span4">
+		<div class="control-group" style="margin-left: 10px;">
+			<label class="control-label"> <b style="font-size: 14px;"> Harga Include PPN </b> </label>
+				<div class="controls">
+					<select  data-placeholder="Pilih ..." id="include_ppn" name="include_ppn" >
+						<option value="ya">YA</option>				
+						<option value="tidak">TIDAK</option>				
+					</select>
+				</div>
+		</div>
+	</div>
+</div>
 
 
 <div class="row-fluid" id="view_data">
@@ -245,24 +288,7 @@ input[type=checkbox]
 				<h3> </h3>
 			</div>
 
-			<div class="control-group">
-				<br>
-				<label class="control-label"> <b style="font-size: 14px;"> Keterangan </b> </label>
-				<div class="controls">
-					<div  class="input-append ">
-						<textarea id="editor" name="ket_penawaran" style="width: 50%; height: 200px; padding: 25px;">
-							Keterangan
-							&nbsp;- Harga Include PPN
-							&nbsp;- Delivery time maksimal 3 Hari setelah PO kami terima
-							&nbsp;- PO mohon mencantumkan No. Telepon penerima barang dan alamat pengiriman
-							&nbsp;- Pembayaran termin 14 hari via transfer ke Mandiri No.Rek. 1440077799937 An.PT.Mitra Centra Niaga atau Via Bank BCA
-							&nbsp;- No.Rek.0893799777 An. PT Mitra Central Niaga.
-							&nbsp;- Contact Person : Dede (081234203219).
-							&nbsp;- Validasi penawaran sampai dengan 14 Januari 2018.
-						</textarea>
-					</div>
-				</div>
-			</div>			
+					
 
 			<div class="widget-container">
 				<div class="row-fluid" style="display: none;">
