@@ -74,7 +74,8 @@
 							<tr>
 								<td align="center">
 									<a target="blank" href="<?=base_url();?>delivery_order_c/cetak/<?=$row->ID;?>" class="btn btn-info" type="button" style="font-size: 15px; padding-right: 8px;"><i class="icon-print"></i></a>						
-									<a class="btn btn-warning" href="<?=base_url();?>delivery_order_beli_c/ubah_data/<?=$row->ID;?>" style="font-size: 15px; padding-right: 8px;"><i class="icon-edit"></i></a>						
+									<a class="btn btn-warning" href="<?=base_url();?>delivery_order_beli_c/ubah_data/<?=$row->ID;?>" style="font-size: 15px; padding-right: 8px;"><i class="icon-edit"></i></a>			
+									<button onclick="detail_transaksi(<?=$row->ID;?>);" data-toggle="modal" data-target="#modal_detail" class="btn btn-info" type="button" style="font-size: 15px; padding-right: 8px;"><i class="icon-eye-open"></i></button>			
 								</td>
 								<td style="font-size:14px; text-align:center; vertical-align:middle;">   <?=$row->NO_BUKTI;?> </td>
 								<td style="font-size:14px; text-align:center; vertical-align:middle;"> 
@@ -127,6 +128,91 @@
     </div>
   </div>
 </div>
+<!-- Modal Detail -->
+<div class="modal fade" id="modal_detail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display:none;">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Detail Penjualan</h4>
+      </div>
+      <div class="modal-body">
+        
+
+		<div class="row-fluid">
+			<div class="span6" style="font-size: 15px;">
+				<address>
+					<strong> No. Transaksi </strong><br>
+					<font id="det_no_transaksi"> Dr. Aristo Jason </font> 
+				</address>
+
+				<address style="margin-top: 18px;">
+					<strong> Nama Customer </strong><br>
+					<font id="det_nama_pelanggan"> Dr. Aristo Jason </font> 
+				</address>
+
+				<address style="margin-top: 18px;">
+					<strong> Alamat </strong><br>
+					<font id="det_alamat_tujuan"> Dr. Aristo Jason </font> 
+				</address>
+
+				<address style="margin-top: 18px;">
+					<strong> Kota Tujuan</strong><br>
+					<font id="det_kota"> Dr. Aristo Jason </font> 
+				</address>
+
+				<address style="margin-top: 18px;">
+					<strong> No Polisi </strong><br>
+					<font id="det_nopol"> Dr. Aristo Jason </font> 
+				</address>
+
+				<address style="margin-top: 18px;">
+					<strong> Sopir </strong><br>
+					<font id="det_sopir"> Dr. Aristo Jason </font> 
+				</address>
+			</div>
+			<div class="span6" style="font-size: 15px;">
+				<address style="margin-top: 18px;">
+					<strong> Nama Produk </strong><br>
+					<font id="det_nama_produk"> Dr. Aristo Jason </font> 
+				</address>
+
+				<address>
+					<strong> No. Segel Atas </strong><br>
+					<font id="det_segel_atas"> Dr. Aristo Jason </font> 
+				</address>
+
+				<address style="margin-top: 18px;">
+					<strong> No. Segel Bawah </strong><br>
+					<font id="det_segel_bawah"> Dr. Aristo Jason </font> 
+				</address>
+
+				<address style="margin-top: 18px;">
+					<strong> Kuantitas </strong><br>
+					<font id="det_qty"> Dr. Aristo Jason </font> 
+				</address>
+
+				<address style="margin-top: 18px;">
+					<strong> Harga Satuan </strong><br>
+					<font id="det_modal"> Dr. Aristo Jason </font> 
+				</address>
+
+				<address style="margin-top: 18px;">
+					<strong> Jumlah </strong><br>
+					<font id="det_hinv"> Dr. Aristo Jason </font> 
+				</address>
+			</div>
+		</div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 
 
@@ -243,7 +329,7 @@ function ubah_data_produk(id){
 function detail_transaksi(id){
 	$('#popup_load').show();
 	$.ajax({
-		url : '<?php echo base_url(); ?>transaksi_penjualan_c/detail_transaksi',
+		url : '<?php echo base_url(); ?>purchase_order_c/detail_transaksi',
 		data : {id:id},
 		type : "POST",
 		dataType : "json",
