@@ -50,12 +50,6 @@ class Input_transaksi_akuntansi_c extends CI_Controller {
 				$this->model->simpan_trx_akuntansi_detail($id_klien, $no_trx_akun, $val, $debet_row[$key], $kredit_row[$key], $no_bukti);
 			}
 
-			if($tipe == "Penjualan"){
-				$get_nilai_hutang_piutang = $this->model->get_nilai_hutang_piutang($id_klien, $no_bukti, 'PIUTANG')->DEBET;
-			} else {
-				$get_nilai_hutang_piutang = $this->model->get_nilai_hutang_piutang($id_klien, $no_bukti, 'HUTANG')->KREDIT;
-			}
-
 			$this->model->repair_detail_voucher($id_klien, $no_trx_akun, $no_bukti);
 			$this->model->save_next_nomor($id_klien, 'TRANSAKSI_AKUN', $no_trx_akun2);
 
@@ -181,18 +175,21 @@ class Input_transaksi_akuntansi_c extends CI_Controller {
 
 		$sql = "
 		SELECT a.* FROM (
-			SELECT ID, NO_BUKTI, TGL_TRX, TOTAL, 'JUAL' AS TIPE, IFNULL(MEMO, '-') AS MEMO FROM ak_penjualan 
-			WHERE NO_TRX_AKUN IS NULL AND $where_unit
+			SELECT a.ID, a.NO_BUKTI, a.TGL_TRX, b.HARGA_INVOICE AS TOTAL, 'JUAL' AS TIPE, IFNULL(KETERANGAN, '-') AS MEMO FROM ak_penjualan_new a
+			JOIN (
+				SELECT ID_PENJUALAN, SUM(HARGA_INVOICE*QTY) AS HARGA_INVOICE FROM ak_penjualan_new_detail 
+				GROUP BY ID_PENJUALAN
+			) b ON a.ID = b.ID_PENJUALAN
+			WHERE a.NO_TRX_AKUN IS NULL
 
 			UNION ALL 
 
-			SELECT ID, NO_BUKTI, TGL_TRX, TOTAL, 'BELI' AS TIPE, IFNULL(MEMO, '-') AS MEMO FROM ak_pembelian 
-			WHERE NO_TRX_AKUN IS NULL AND $where_unit
-
-			UNION ALL 
-
-			SELECT ID, NO_BUKTI, TGL_TRX, TOTAL, 'LAIN' AS TIPE, IFNULL(MEMO, '-') AS MEMO FROM ak_transaksi_lainnya 
-			WHERE NO_TRX_AKUN IS NULL AND $where_unit
+			SELECT a.ID, a.NO_BUKTI, a.TGL_TRX, b.HARGA_INVOICE AS TOTAL, 'BELI' AS TIPE, IFNULL(KETERANGAN, '-') AS MEMO FROM ak_pembelian_new a
+			JOIN (
+				SELECT ID_PENJUALAN, SUM(HARGA_INVOICE) AS HARGA_INVOICE FROM ak_pembelian_new_detail 
+				GROUP BY ID_PENJUALAN
+			) b ON a.ID = b.ID_PENJUALAN
+			WHERE a.NO_TRX_AKUN IS NULL
 		) a
 		WHERE $where AND a.TIPE = '$tipe_bukti'
 		ORDER BY a.ID DESC
@@ -248,22 +245,21 @@ class Input_transaksi_akuntansi_c extends CI_Controller {
 		$tipe = $this->input->post('tipe');
 
 		$tabel = "";
+		$tabel2 = "";
 		$kode = "";
 		if($tipe=="JUAL"){
-			$tabel = "ak_penjualan";
+			$tabel = "ak_penjualan_new";
+			$tabel2 = "ak_penjualan_new_detail";
 			$kode = "a.KODE_AKUN_PIUTANG";
 		} else if($tipe == "BELI"){
-			$tabel = "ak_pembelian";
+			$tabel = "ak_pembelian_new";
+			$tabel2 = "ak_pembelian_new_detail";
 			$kode = "a.KODE_AKUN_HUTANG";
-		} else if($tipe == "LAIN"){
-			$tabel = "ak_transaksi_lainnya";
-			$kode = "a.KODE_AKUN_HUTANG";
-		}
+		} 
 
 		$sql = "
-		SELECT a.*, b.NAMA_PAJAK, b.PROSEN, b.PAJAK_PEMBELIAN, b.PAJAK_PENJUALAN, '$tipe' AS TIPE_TRX, c.NAMA_AKUN AS NAMA_AKUN_HP FROM $tabel a 
-		LEFT JOIN ak_setup_pajak b ON a.ID_PAJAK = b.ID
-		LEFT JOIN ak_kode_akuntansi c ON $kode = c.KODE_AKUN
+		SELECT a.*, '$tipe' AS TIPE_TRX, b.HARGA_INVOICE FROM $tabel a 
+		JOIN $tabel2 b ON a.ID = b.ID_PENJUALAN
 		WHERE a.ID = $id
 		";
 
@@ -277,9 +273,9 @@ class Input_transaksi_akuntansi_c extends CI_Controller {
 
 		$tabel = "ak_transaksi_lainnya_detail";
 		if($tipe=="JUAL"){
-			$tabel = "ak_penjualan_detail";
+			$tabel = "ak_penjualan_new_detail";
 		} else if($tipe == "BELI"){
-			$tabel = "ak_pembelian_detail";
+			$tabel = "ak_pembelian_new_detail";
 		}
 
 		$sess_user = $this->session->userdata('masuk_akuntansi');
@@ -288,8 +284,9 @@ class Input_transaksi_akuntansi_c extends CI_Controller {
 		$user 	  = $this->master_model_m->get_user_info($id_user);
 
 		$sql = "
-		SELECT DISTINCT a.*, b.NAMA_AKUN, b.KATEGORI FROM $tabel a 
+		SELECT DISTINCT a.*, b.NAMA_AKUN, b.KATEGORI, c.SATUAN FROM $tabel a 
 		LEFT JOIN ak_kode_akuntansi b ON a.KODE_AKUN = b.KODE_AKUN AND b.UNIT = '$user->UNIT'
+		LEFT JOIN ak_produk c ON a.ID_PRODUK = c.ID
 		WHERE a.ID_PENJUALAN = $id
 		";
 

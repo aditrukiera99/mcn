@@ -7,7 +7,6 @@ header("Content-Disposition: attachment; filename=Laporan_neraca.xls");
 
 <style>
 .gridth {
-    background: #388ed1;
     vertical-align: middle;
     color : #FFF;
     text-align: center;
@@ -38,7 +37,6 @@ table th {
     height: 35px;
     padding: 10px;
     vertical-align: middle;
-    background: #388ed1;
     font-size: 17px;
 }
 
@@ -46,17 +44,9 @@ table th {
 
 <table cellspacing="0"> 
     <tr>
-        <td align="left" >
-            <h5>
-               PT. PRIMA ELEKTRIK POWER <br>
-            </h5>
-        </td>
-    </tr>
-    <tr>
         <td align="center" colspan="2">
             <h4>
                 LAPORAN NERACA <br>
-                UNIT : <?=strtoupper($dt_unit->NAMA_UNIT);?><br>
                 <?PHP if($filter == "Bulanan"){ ?>
                 PER <?=strtoupper($bulan_txt);?> <?=$tahun;?>
                 <?PHP } else { ?>

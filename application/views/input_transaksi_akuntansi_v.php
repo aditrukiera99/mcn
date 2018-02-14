@@ -214,10 +214,10 @@ input[type=checkbox]
 				<tr>
 					<th align="center"> No </th>
 					<th align="center"> Item </th>
-					<th align="center"> Kuantitas </th>
+					<th align="center"> Volume </th>
 					<th align="center"> Satuan </th>
 					<th align="center"> Harga Satuan (Rp) </th>
-					<th align="center"> Jumlah (Rp) </th>
+					<th align="center"> Total (Rp) </th>
 				</tr>						
 			</thead>
 			<tbody id="tes" style="font-size: 13px;">
@@ -408,6 +408,7 @@ function get_popup_no_bukti(){
                 '                        <th style="white-space:nowrap;">NO TRANSAKSI</th>'+
                 // '                        <th>TOTAL (Rp)</th>'+
                 '                        <th>TIPE</th>'+
+                '                        <th style="width: 20%;">TOTAL</th>'+
                 '                        <th style="width: 20%;">URAIAN</th>'+
                 '                    </tr>'+
                 '                </thead>'+
@@ -454,17 +455,11 @@ function ajax_no_bukti(){
                 	tipe_data = "Transaksi Lainnya";
                 }
 
-                if(tipe_data == "Penjualan"){
-
-                } else {
-
-                }
-
                 isine += '<tr onclick="get_transaksi(\'' +res.ID+ '\',\'' +res.TIPE+ '\');" style="cursor:pointer;">'+
                             '<td align="center">'+no+'</td>'+
                             '<td align="center">'+res.NO_BUKTI+'</td>'+
-                            // '<td align="right">'+NumberToMoney(res.TOTAL).split('.00').join('')+'</td>'+
                             '<td align="center">'+tipe_data+'</td>'+
+                            '<td align="right" style="text-align:left;">Rp '+NumberToMoney(res.TOTAL).split('.00').join('')+'</td>'+
                             '<td align="center">'+res.MEMO+'</td>'+
                         '</tr>';
             });
@@ -505,41 +500,29 @@ function get_transaksi(id , tipe){
         },
         success : function(res){
 
-        	var pajak = res.NAMA_PAJAK+" ("+res.PROSEN+"%)";
-        	if(res.NAMA_PAJAK == null){
-        		pajak = "-";
-        	}
+        	// var pajak = res.NAMA_PAJAK+" ("+res.PROSEN+"%)";
+        	// if(res.NAMA_PAJAK == null){
+        	// 	pajak = "-";
+        	// }
 
         	var no_akun_pajak = "";
         	if(res.TIPE_TRX == "JUAL"){
         		$('#tipe').val('Penjualan');
-        		no_akun_pajak = res.PAJAK_PENJUALAN;
+        		// no_akun_pajak = res.PAJAK_PENJUALAN;
         	} else if(res.TIPE_TRX == "BELI"){
         		$('#tipe').val('Pembelian');
-        		no_akun_pajak = res.PAJAK_PEMBELIAN;
-        	} else {
-        		$('#tipe').val('Transaksi Lainnya');
-        		no_akun_pajak = res.PAJAK_PEMBELIAN;
-        	}
-
-        	if(res.LUNAS == 1){
-        		$('#lunas_sts').show();
-        		$('#gak_lunas_sts').hide();
-        	} else {
-        		$('#lunas_sts').hide();
-        		$('#gak_lunas_sts').show();
-        		$('#gak_lunas_sts').html('Belum Lunas ('+res.NAMA_AKUN_HP+') ');
+        		// no_akun_pajak = res.PAJAK_PEMBELIAN;
         	}
 
         	$('#no_bukti').val(res.NO_BUKTI);
         	$('#tgl_trx').val(res.TGL_TRX);
         	$('#kontak').val(res.PELANGGAN);
-        	$('#alamat_kontak').val(res.ALAMAT);
-        	$('#uraian').val(res.MEMO);
-        	$('#pajak').val(pajak);
-        	$('#nilai_pajak').val(NumberToMoney(res.NILAI_PAJAK).split('.00').join(''));
-        	$('#nilai_total').val(NumberToMoney(res.TOTAL).split('.00').join(''));
-        	$('#sub_total_trx_detail').html("<b style='font-size:15px; color:green;'>"+NumberToMoney(res.SUB_TOTAL).split('.00').join('')+"</b>");
+        	$('#alamat_kontak').val(res.ALAMAT_TUJUAN);
+        	$('#uraian').val(res.KETERANGAN);
+        	// $('#pajak').val(pajak);
+        	// $('#nilai_pajak').val(NumberToMoney(res.NILAI_PAJAK).split('.00').join(''));
+        	$('#nilai_total').val(NumberToMoney(res.HARGA_INVOICE).split('.00').join(''));
+        	$('#sub_total_trx_detail').html("<b style='font-size:15px; color:green;'>"+NumberToMoney(res.HARGA_INVOICE).split('.00').join('')+"</b>");
 
         	$('#search_koang').val("");
 		    $('#popup_koang').css('display','none');
@@ -580,18 +563,32 @@ function get_transaksi_detail(id, tipe){
         success : function(result){
             var isine = '';
             var no = 0;
-            var total = 0;
+            var total = 0;            
             $.each(result,function(i,res){
                 no++;
-                isine += '<tr>'+
+                if(tipe == "BELI"){
+                	isine += '<tr>'+
                             '<td style="text-align:center;">'+no+'</td>'+
                             '<td style="text-align:left;">'+res.NAMA_PRODUK+'</td>'+
                             '<td style="text-align:center;">'+res.QTY+'</td>'+
                             '<td style="text-align:center;">'+res.SATUAN+'</td>'+
-                            '<td style="text-align:right;">'+NumberToMoney(res.HARGA_SATUAN).split('.00').join('')+'</td>'+
-                            '<td style="text-align:right;"><b>'+NumberToMoney(parseFloat(res.HARGA_SATUAN) * parseFloat(res.QTY)).split('.00').join('')+'</b></td>'+
+                            '<td style="text-align:right;">'+NumberToMoney(res.MODAL).split('.00').join('')+'</td>'+
+                            '<td style="text-align:right;"><b>'+NumberToMoney(parseFloat(res.MODAL) * parseFloat(res.QTY)).split('.00').join('')+'</b></td>'+
                         '</tr>';
-                 total += parseFloat(res.HARGA_SATUAN) * parseFloat(res.QTY);
+                 	total += parseFloat(res.MODAL) * parseFloat(res.QTY);
+
+                } else {
+                	isine += '<tr>'+
+                            '<td style="text-align:center;">'+no+'</td>'+
+                            '<td style="text-align:left;">'+res.NAMA_PRODUK+'</td>'+
+                            '<td style="text-align:center;">'+res.QTY+'</td>'+
+                            '<td style="text-align:center;">'+res.SATUAN+'</td>'+
+                            '<td style="text-align:right;">'+NumberToMoney(res.HARGA_INVOICE).split('.00').join('')+'</td>'+
+                            '<td style="text-align:right;"><b>'+NumberToMoney(parseFloat(res.HARGA_INVOICE) * parseFloat(res.QTY)).split('.00').join('')+'</b></td>'+
+                        '</tr>';
+                 	total += parseFloat(res.HARGA_INVOICE) * parseFloat(res.QTY);
+                }
+                
             });
             $('#tes').html(isine); 
             $('#nilai_total').val(NumberToMoney(total).split('.00').join('')); 

@@ -6,7 +6,6 @@ header("Content-Disposition: attachment; filename=Laporan_jurnal_memorial.xls");
 
 <style>
 .gridth {
-    background: #1793d1;
     vertical-align: middle;
     color : #FFF;
     text-align: center;
@@ -37,7 +36,6 @@ table th {
 
 .kolom_header{
     height: 40px;
-    background: #388ed1;
     padding-left: 5px;
     padding-right: 5px;
     font-size: 17px;
@@ -50,13 +48,14 @@ table th {
     $old_voc = "";
 ?>
 
+<?PHP if(count($data) > 0){ ?>
+
 <table align="center" style="width:100%;">
     <tr>
         <td align="center" colspan="5">
             <h4>
-                JURNAL MEMORIAL
-                <?=strtoupper($judul);?> <br>   
-                UNIT : <?=strtoupper($dt_unit->NAMA_UNIT);?>        
+                JURNAL MEMORIAL <br>
+                <?=strtoupper($judul);?> <br>       
             </h4>
         </td>
     </tr>
@@ -161,19 +160,11 @@ table th {
     </tr>
 </table>
 
-<?PHP if(count($data) == 0){ ?>
+<?PHP } else if(count($data) == 0){ ?>
 
 <table align="center" class="grid" style="width:100%;">
     <tr>
-        <th style='text-align:center; width:15%;' class='kolom_header'> No </th>
-        <th style='text-align:center; width:15%;' class='kolom_header'> Tanggal </th>
-        <th style='text-align:center; width:15%;' class='kolom_header'> Uraian </th>
-        <th style='text-align:center; width:15%;' class='kolom_header'> Nomor Bukti </th>
-        <th style='text-align:center; width:15%;' class='kolom_header'> Debet </th>
-        <th style='text-align:center; width:15%;' class='kolom_header'> Kredit </th>
-    </tr>
-    <tr>
-        <td class='gridtd' colspan='6' align="center"> <b> Tidak ada data yang dapat ditampilkan </b> </td>
+        <td class='gridtd'  align="center"> <b> Tidak ada data yang dapat ditampilkan </b> </td>
     </tr>
 </table>
 

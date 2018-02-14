@@ -18,9 +18,10 @@ class Lap_pembelian_m extends CI_Model
 
     function get_lap_penjualan($id_klien, $tgl_awal, $tgl_akhir, $unit){
         $sql = "      
-        SELECT a.ID, a.TGL_TRX, a.NO_BUKTI, a.PELANGGAN, b.NAMA_PRODUK, b.QTY, b.HARGA_SATUAN, b.SATUAN, b.TOTAL FROM ak_pembelian a 
-        JOIN ak_pembelian_detail b ON a.ID = b.ID_PENJUALAN
-        WHERE STR_TO_DATE(a.TGL_TRX, '%d-%c-%Y') <= STR_TO_DATE('$tgl_akhir' , '%d-%c-%Y') AND STR_TO_DATE(a.TGL_TRX, '%d-%c-%Y') >= STR_TO_DATE('$tgl_awal' , '%d-%c-%Y') AND a.UNIT = '$unit'
+        SELECT a.ID, a.TGL_TRX, a.NO_BUKTI, a.PELANGGAN, b.NAMA_PRODUK, b.QTY, b.MODAL AS HARGA_SATUAN, c.SATUAN, b.HARGA_INVOICE AS TOTAL FROM ak_pembelian_new a 
+        JOIN ak_pembelian_new_detail b ON a.ID = b.ID_PENJUALAN
+        JOIN ak_produk c ON b.ID_PRODUK = c.ID
+        WHERE STR_TO_DATE(a.TGL_TRX, '%d-%c-%Y') <= STR_TO_DATE('$tgl_akhir' , '%d-%c-%Y') AND STR_TO_DATE(a.TGL_TRX, '%d-%c-%Y') >= STR_TO_DATE('$tgl_awal' , '%d-%c-%Y')
         ORDER BY a.ID ASC
         ";
 
@@ -29,9 +30,10 @@ class Lap_pembelian_m extends CI_Model
 
     function get_lap_penjualan_bulanan($id_klien, $bulan, $tahun, $unit){
         $sql = "
-        SELECT a.ID, a.TGL_TRX, a.NO_BUKTI, a.PELANGGAN, b.NAMA_PRODUK, b.QTY, b.HARGA_SATUAN, b.SATUAN, b.TOTAL FROM ak_pembelian a 
-        JOIN ak_pembelian_detail b ON a.ID = b.ID_PENJUALAN
-        WHERE a.TGL_TRX LIKE '%-$bulan-$tahun%' AND a.UNIT = '$unit'
+        SELECT a.ID, a.TGL_TRX, a.NO_BUKTI, a.PELANGGAN, b.NAMA_PRODUK, b.QTY, b.MODAL AS HARGA_SATUAN, c.SATUAN, b.HARGA_INVOICE AS TOTAL FROM ak_pembelian_new a 
+        JOIN ak_pembelian_new_detail b ON a.ID = b.ID_PENJUALAN
+        JOIN ak_produk c ON b.ID_PRODUK = c.ID
+        WHERE a.TGL_TRX LIKE '%-$bulan-$tahun%'
         ORDER BY a.ID ASC
         ";
 

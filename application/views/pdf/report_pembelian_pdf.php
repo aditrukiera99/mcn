@@ -7,7 +7,6 @@ $base_url2 .=  str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT
 
 <style>
 .gridth {
-    background: #1793d1;
     vertical-align: middle;
     color : #FFF;
     text-align: center;
@@ -36,7 +35,6 @@ table th {
 
 .kolom_header{
     height: 30px;
-    background: #388ed1;
     padding-left: 5px;
     padding-right: 5px;
     font-size: 14px;
@@ -48,19 +46,6 @@ table th {
     $voc_now = "";
     $old_voc = "";
 ?>
-
-<table cellspacing="0" align="left"> 
-    <tr align="center">
-        <td align="left">
-            <h5>
-                PT. Prima Elektrik Power <br> <br>
-                DIVISI <?=strtoupper($dt_unit->NAMA_UNIT);?>    
-            </h5>
-        </td>
-    </tr>
-</table>
-
-<hr>
 
 <table align="center">
     <tr>
@@ -81,7 +66,7 @@ table th {
         <th style='text-align:center; width:20%;' class='kolom_header'> SUPPLIER / TOKO </th>
         <th style='text-align:center; width:10%;' class='kolom_header'> ITEM </th>
         <th style='text-align:center; width:10%;' class='kolom_header'> HARGA </th>
-        <th style='text-align:center; width:10%;' class='kolom_header'> QTY </th>
+        <th style='text-align:center; width:10%;' class='kolom_header'> VOLUME </th>
         <th style='text-align:center; width:10%;' class='kolom_header'> TOTAL </th>
     </tr>
     <?PHP 
@@ -153,13 +138,13 @@ table th {
 
     <?PHP 
     echo "<tr>" ;
-        echo "<td class='gridtd' style='text-align:center;'></td>" ;
-        echo "<td class='gridtd' style='text-align:center;'></td>" ;
-        echo "<td class='gridtd' style='text-align:center;'></td>" ;
-        echo "<td class='gridtd' style='text-align:center;'></td>" ;
-        echo "<td class='gridtd' style='text-align:center;'></td>" ;
-        echo "<td class='gridtd' style='text-align:center;'></td>" ;
-        echo "<td class='gridtd' style='text-align:center;'></td>" ;
+        echo "<td class='gridtd' style='border: 1px solid #000 !important; text-align:center;'></td>" ;
+        echo "<td class='gridtd' style='border: 1px solid #000 !important; text-align:center;'></td>" ;
+        echo "<td class='gridtd' style='border: 1px solid #000 !important; text-align:center;'></td>" ;
+        echo "<td class='gridtd' style='border: 1px solid #000 !important; text-align:center;'></td>" ;
+        echo "<td class='gridtd' style='border: 1px solid #000 !important; text-align:center;'></td>" ;
+        echo "<td class='gridtd' style='border: 1px solid #000 !important; text-align:center;'></td>" ;
+        echo "<td class='gridtd' style='border: 1px solid #000 !important; text-align:center;'></td>" ;
     echo "</tr>" ;
     ?>
 

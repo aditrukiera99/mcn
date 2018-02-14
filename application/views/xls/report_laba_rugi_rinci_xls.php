@@ -7,7 +7,6 @@ header("Content-Disposition: attachment; filename=laporan_laba_rugi.xls");
 
 <style>
 .gridth {
-    background: #388ed1;
     vertical-align: middle;
     color : #FFF;
     text-align: center;
@@ -39,22 +38,12 @@ table th {
     height: 35px;
     padding: 10px;
     vertical-align: middle;
-    background: #388ed1;
     font-size: 18px;
 }
 
 </style>
 
 <table cellspacing="0"> 
-    <tr>
-        <td align="left" >
-            <h4>
-                PT. Prima Elektrik Power <br><br>
-                <u>Divisi <?=strtoupper($dt_unit->NAMA_UNIT);?></u>
-            </h4>
-        </td>
-    </tr>
-
     <tr>
         <td align="center">
             <h4>
@@ -72,9 +61,9 @@ table th {
         <td style="vertical-align:top;">
             <table align="center" class="grid">
                 <tr>
-                    <th style='text-align:center;' class='kolom_header'> NO </th>
-                    <th style='text-align:center;' class='kolom_header'> PERKIRAAN </th>
-                    <th style='text-align:center;' class='kolom_header'> TARGET <?=$tahun;?></th>
+                    <th style='text-align:center;' class='kolom_header' rowspan="2"> NO </th>
+                    <th style='text-align:center;' class='kolom_header' rowspan="2"> PERKIRAAN </th>
+                    <th style='text-align:center;' class='kolom_header' rowspan="2"> TARGET <?=$tahun;?></th>
                     <th style='text-align:center;' class='kolom_header' colspan="2"> S/D BULAN LALU</th>
                     <th style='text-align:center;' class='kolom_header' colspan="2"> BULAN LAPOR</th>
                     <th style='text-align:center;' class='kolom_header' colspan="2"> S/D BULAN INI</th>
@@ -83,9 +72,6 @@ table th {
                 </tr>
 
                 <tr>
-                    <th style='text-align:center;' class='kolom_header'></th>
-                    <th style='text-align:center;' class='kolom_header'></th>
-                    <th style='text-align:center;' class='kolom_header'></th>
                     <th style='text-align:center;' class='kolom_header'>RKP</th>
                     <th style='text-align:center;' class='kolom_header'>REALISASI</th>
                     <th style='text-align:center;' class='kolom_header'>RKP</th>

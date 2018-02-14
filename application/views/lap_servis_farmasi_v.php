@@ -19,15 +19,6 @@
 		<div class="content-widgets light-gray">
 			<div class="widget-container">
 				<form action="<?=base_url().$post_url;?>" method="post" class="form-horizontal" target="_blank">
-					<div class="control-group">
-						<label class="control-label"> <b style="font-size: 14px;"> Unit </b> </label>
-						<div class="controls">
-							<div class="input-append" style="width: 50%;">
-								<input style="width: 90%; background: #FFF;" type="text" id="unit_txt" name="unit_txt" value="<?=$user->NAMA_UNIT;?>" readonly>
-								<input style="width: 90%;" type="hidden" id="unit" name="unit" value="<?=$user->UNIT;?>">
-							</div>
-						</div>
-					</div>
 					
 					<div class="control-group">
 						<label class="control-label"> <b style="font-size: 14px;"> Filter </b> </label>

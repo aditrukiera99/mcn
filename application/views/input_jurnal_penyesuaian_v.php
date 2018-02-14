@@ -144,7 +144,7 @@ input[type=checkbox]
 				<div class="controls">
 					<select  data-placeholder="Pilih ..." class="chzn-select" tabindex="2" style="width:300px;" id="kode_akun_add" name="kode_akun_add">
 						<?PHP foreach ($get_list_akun_all as $key => $akun_all) { ?>
-							<option value="<?=$akun_all->KODE_AKUN;?>"> (<?=$akun_all->KODE_AKUN;?>) - <?=$akun_all->NAMA_AKUN;?></option>
+							<option value="<?=$akun_all->KODE_AKUN;?>"> <?=$akun_all->KODE_AKUN;?> - <?=$akun_all->NAMA_AKUN;?></option>
 						<?PHP } ?>				
 					</select>
 				</div>

@@ -102,17 +102,51 @@ class Lap_servis_farmasi_c extends CI_Controller {
 		$sess_user = $this->session->userdata('masuk_akuntansi');
 		$id_klien = $sess_user['id_klien'];
 
+		//$tgl   = $this->input->post('tgl');
+		
+		$filter = $this->input->post('filter');
+		$unit = $this->input->post('unit');
 		$view = "xls/report_keseluruhan_xls";
+		$dt = "";
+		$judul = "";
+		$dt_unit = $this->master_model_m->get_unit_by_id($unit);
 
+		
+
+		if($filter == "Harian"){
+			$tgl_full = $this->input->post('tgl');
+			if($tgl_full == ""){
+				$tgl_full = date('d-m-Y')." sampai ".date('d-m-Y');
+			}
+			
+			$tgl = explode(' sampai ', $tgl_full);
+			$tgl_awal = $tgl[0];
+			$tgl_akhir = $tgl[1];
+			$judul = "Tanggal $tgl_awal s/d $tgl_akhir";
+
+			$dt = $this->model->get_lap_penjualan($id_klien, $tgl_awal, $tgl_akhir, $unit);
+		
+		} else if($filter == "Bulanan"){
+			$tahun = $this->input->post('tahun');
+			$bulan = $this->input->post('bulan');
+			$bln_txt = $this->datetostr($bulan);
+			$judul = "Bulan $bln_txt $tahun";
+
+			$dt = $this->model->get_lap_penjualan_bulanan($id_klien, $bulan, $tahun, $unit);
+		} 
 
 
 
 		$data = array(
+			'title' 		=> 'LAPORAN JURNAL MEMORIAL',
+			'title2'		=> 'SEMUA BAGIAN',
+			'data'			=> $dt,
+			'judul'			=> $judul,
+			'dt_unit'		=> $dt_unit,
 			'data_usaha'    => $this->master_model_m->data_usaha($id_klien),
 		);
 		$this->load->view($view,$data);
 	}
-
 
 	function cari_kode(){
 		$sess_user = $this->session->userdata('masuk_akuntansi');

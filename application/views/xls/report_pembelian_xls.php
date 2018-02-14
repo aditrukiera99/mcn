@@ -6,7 +6,6 @@ header("Content-Disposition: attachment; filename=Laporan_pembelian.xls");
 
 <style>
 .gridth {
-    background: #1793d1;
     vertical-align: middle;
     color : #FFF;
     text-align: center;
@@ -37,7 +36,6 @@ table th {
 
 .kolom_header{
     height: 40px;
-    background: #388ed1;
     padding-left: 5px;
     padding-right: 5px;
     font-size: 17px;
@@ -49,18 +47,6 @@ table th {
     $voc_now = "";
     $old_voc = "";
 ?>
-
-<table cellspacing="0" align="left"> 
-    <tr align="center">
-        <td align="left" colspan="7">
-            <h5>
-                PT. PRIMA ELEKTRIK POWER <br>
-                DIVISI <?=strtoupper($dt_unit->NAMA_UNIT);?>    
-            </h5>
-        </td>
-    </tr>
-</table>
-
 
 <table align="center">
     <tr>
@@ -76,11 +62,11 @@ table th {
 <table align="center" class="grid">
     <tr>
         <th style='text-align:center; width:10%;' class='kolom_header'> TANGGAL </th>
-        <th style='text-align:center; width:10%;' class='kolom_header'> INVOICE </th>
+        <th style='text-align:center; width:10%;' class='kolom_header'> NO BUKTI </th>
         <th style='text-align:center; width:20%;' class='kolom_header'> SUPPLIER / TOKO </th>
         <th style='text-align:center; width:10%;' class='kolom_header'> ITEM </th>
         <th style='text-align:center; width:10%;' class='kolom_header'> HARGA </th>
-        <th style='text-align:center; width:10%;' class='kolom_header'> QTY </th>
+        <th style='text-align:center; width:10%;' class='kolom_header'> VOLUME </th>
         <th style='text-align:center; width:10%;' class='kolom_header'> TOTAL </th>
     </tr>
     <?PHP 
@@ -148,18 +134,6 @@ table th {
 
         $old_voc = $row->ID;
     }
-    ?>
-
-    <?PHP 
-    echo "<tr>" ;
-        echo "<td class='gridtd' style='text-align:center;'></td>" ;
-        echo "<td class='gridtd' style='text-align:center;'></td>" ;
-        echo "<td class='gridtd' style='text-align:center;'></td>" ;
-        echo "<td class='gridtd' style='text-align:center;'></td>" ;
-        echo "<td class='gridtd' style='text-align:center;'></td>" ;
-        echo "<td class='gridtd' style='text-align:center;'></td>" ;
-        echo "<td class='gridtd' style='text-align:center;'></td>" ;
-    echo "</tr>" ;
     ?>
 
     <tr>

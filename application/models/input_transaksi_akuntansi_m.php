@@ -113,25 +113,18 @@ class Input_transaksi_akuntansi_m extends CI_Model
 
     function update_penjualan_pembelian($id_klien, $no_bukti, $no_trx_akun){
         $sql = "
-        UPDATE ak_pembelian SET NO_TRX_AKUN = '$no_trx_akun'
+        UPDATE ak_pembelian_new SET NO_TRX_AKUN = '$no_trx_akun'
         WHERE ID_KLIEN = $id_klien AND NO_BUKTI = '$no_bukti'
         ";
 
         $this->db->query($sql);
 
         $sql_2 = "
-        UPDATE ak_penjualan SET NO_TRX_AKUN = '$no_trx_akun'
+        UPDATE ak_penjualan_new SET NO_TRX_AKUN = '$no_trx_akun'
         WHERE ID_KLIEN = $id_klien AND NO_BUKTI = '$no_bukti'
         ";
 
         $this->db->query($sql_2);
-
-        $sql_3 = "
-        UPDATE ak_transaksi_lainnya SET NO_TRX_AKUN = '$no_trx_akun'
-        WHERE ID_KLIEN = $id_klien AND NO_BUKTI = '$no_bukti'
-        ";
-
-        $this->db->query($sql_3);
     }
 
     function simpan_piutang($id_klien, $no_trx, $tgl_trx, $total_all, $tipe){

@@ -7,7 +7,6 @@ header("Content-Disposition: attachment; filename=Laporan_mutasi_piutang.xls");
 
 <style>
 .gridth {
-    background: #388ed1;
     vertical-align: middle;
     color : #FFF;
     text-align: center;
@@ -15,7 +14,6 @@ header("Content-Disposition: attachment; filename=Laporan_mutasi_piutang.xls");
     font-size: 14px;
 }
 .gridtd {
-    background: #FFFFF0;
     vertical-align: middle;
     font-size: 15px;
     height: 30px;
@@ -39,19 +37,11 @@ table th {
     height: 35px;
     padding: 10px;
     vertical-align: middle;
-    background: #388ed1;
 }
 
 </style>
 
 <table cellspacing="0"> 
-    <tr>
-        <td align="left" >
-            <h5>
-                PT. PRIMA ELEKTRIK POWER <br>
-            </h5>
-        </td>
-    </tr>
     <tr>
         <td align="center" colspan="2">
             <h4>
