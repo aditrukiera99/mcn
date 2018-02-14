@@ -389,9 +389,9 @@ class Penawaran_barang_m extends CI_Model
 
         $sql = "
         INSERT INTO ak_penjualan_detail 
-        (ID_KLIEN, ID_PENJUALAN, NAMA_PRODUK, QTY, SATUAN, HARGA_SATUAN, TOTAL, KODE_AKUN)
+        (ID_KLIEN, ID_PENJUALAN, NAMA_PRODUK, QTY, SATUAN, HARGA_SATUAN)
         VALUES 
-        ($id_klien, $id_penjualan, '$nama_produk', $qty, '$satuan', $harga_satuan, $jumlah, '$kode_akun')
+        ($id_klien, $id_penjualan, '$nama_produk', $qty, '$satuan', $harga_satuan)
         ";
 
         $this->db->query($sql);
@@ -424,7 +424,7 @@ class Penawaran_barang_m extends CI_Model
 
     function hapus_detail_trx($id){
         $sql = "
-        DELETE FROM ak_penjualan_detail WHERE ID_PENJUALAN = $id
+        DELETE FROM ak_penjualan_detail WHERE ID_PENJUALAN = '$id'
         ";
 
         $this->db->query($sql);
@@ -438,6 +438,29 @@ class Penawaran_barang_m extends CI_Model
         ";
 
         $this->db->query($sql);
+    }
+
+    function ubah_penawaran($id_penawaran, $id_klien, $no_trx, $id_pelanggan, $pelanggan, $alamat_tagih, $tgl_trx, $tgl_jatuh_tempo, $id_pajak, $sub_total, $pajak_total, $total_all, $sts_lunas, $memo_lunas, $akun_piutang, $kode_akun_pajak, $unit, $atas_nama, $ket_penawaran, $contact_person, $validasi_tgl, $include_ppn){
+
+        $sql = "
+        UPDATE ak_penjualan SET 
+            ID_PELANGGAN = '$id_pelanggan',
+            PELANGGAN = '$pelanggan',
+            ALAMAT = '$alamat_tagih',
+            TGL_TRX = '$tgl_trx',
+            SUB_TOTAL = '$sub_total',
+            TOTAL = '$total_all',
+            LUNAS = '1',
+            MEMO = '$memo_lunas',
+            TIPE = 'PENAWARAN',
+            UP = '$atas_nama',
+            CONTACT_PERSON = '$contact_person',
+            VALIDASI = '$validasi_tgl',
+            INCLUDE_PPN = '$include_ppn'
+        WHERE ID = '$id_penawaran'
+        ";
+
+         $this->db->query($sql);
     }
 
 }

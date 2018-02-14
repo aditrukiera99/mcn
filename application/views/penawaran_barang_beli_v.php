@@ -99,38 +99,28 @@ if($last_cc->KODE_AKUN != "" || $last_cc->KODE_AKUN != null ){
 				<table class="stat-table table table-hover" id="data-table">
 					<thead>
 						<tr>
+							<th align="center"> Aksi </th>
 							<th align="center"> Tanggal </th>
 							<th align="center"> Nomor </th>
 							<th align="center"> Pelanggan </th>
-							<th align="center"> Aksi </th>
 						</tr>						
 					</thead>
 					<tbody id="tes">
 						<?PHP  foreach ($dt as $key => $row) { ?>
 							<input type="hidden" id="sts_pembukuan_<?=$row->ID;?>" value="<?=$row->NO_TRX_AKUN;?>" />
 							<tr>
+								<td align="center">
+									<a target="blank" href="<?=base_url();?>penawaran_barang_beli_c/cetak/<?=$row->ID;?>" class="btn btn-info" type="button" style="font-size: 15px; padding-right: 8px;"><i class="icon-print"></i></a>
+
+									<a style="font-size: 15px; padding-right: 8px;" class="btn btn-danger" onclick="$('#dialog-btn').click(); $('#id_hapus').val('<?=$row->ID;?>');" href="javascript:;"><i class="icon-trash"></i></a>						
+									<a class="btn btn-warning" href="<?=base_url();?>penawaran_barang_beli_c/ubah_data/<?=$row->ID;?>" style="font-size: 15px; padding-right: 8px;"><i class="icon-edit"></i></a>						
+									<a href="<?=base_url();?>penawaran_barang_beli_c/detail/<?=$row->ID;?>" class="btn btn-info" type="button" style="font-size: 15px; padding-right: 8px;"><i class="icon-eye-open"></i></a>
+								</td>
 								<td style="font-size:14px; text-align:center; vertical-align:middle;"> <?=$row->TGL_TRX;?> </td>
 								<td style="font-size:14px; text-align:left; vertical-align:middle;"> <?=$row->NO_BUKTI;?> </td>
 								<td style="font-size:14px; text-align:left; vertical-align:middle;"> <?=$row->PELANGGAN;?> </td>
-								<td align="center"> 								
-								<div class="btn-group">
-									<button style="padding: 2px 10px;"  data-toggle="dropdown" class="btn btn-info dropdown-toggle"> Aksi <span class="caret"></span>
-									</button>
-									<ul class="dropdown-menu" style="background-color:rgba(255, 255, 255, 1); min-width: 120px;">
-										<?PHP if($row->NO_TRX_AKUN == "" || $row->NO_TRX_AKUN == null ){ ?>
-										<!-- <li>
-										<a href="<?=base_url();?>penawaran_barang_beli_c/ubah_data/<?=$row->ID;?>">Ubah</a>
-										</li>
-										<?PHP } ?>
-										<li>
-										<a href="<?=base_url();?>penawaran_barang_beli_c/detail/<?=$row->ID;?>">Detail</a>
-										</li> -->
-										<li >
-										<a target="_blank" href="<?=base_url();?>penawaran_barang_beli_c/cetak/<?=$row->ID;?>">Cetak</a>
-										</li>
-									</ul>
-								</div>
-							</td>
+
+								
 							</tr>
 						<?PHP }	?>
 					</tbody>

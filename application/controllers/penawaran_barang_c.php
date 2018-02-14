@@ -60,9 +60,7 @@ class Penawaran_barang_c extends CI_Controller {
 			$this->model->simpan_penjualan($id_klien, $no_trx, $id_pelanggan, $pelanggan, $alamat_tagih, $tgl_trx, $tgl_jatuh_tempo, $id_pajak, $sub_total, $pajak_total, $total_all, $sts_lunas, $memo_lunas, $akun_piutang, $kode_akun_pajak, $unit, $atas_nama, $ket_penawaran, $contact_person, $validasi_tgl, $include_ppn);
 			$id_penjualan = $this->db->insert_id();
 
-			$this->model->save_next_nomor($id_klien, 'PENAWARAN', $no_trx2);
-
-			
+			$this->model->save_next_nomor($id_klien, 'PENAWARAN', $no_trx2);			
 
 			$nama_produk 	= $this->input->post('nama_produk');
 			$id_produk 	    = $this->input->post('produk');
@@ -79,6 +77,56 @@ class Penawaran_barang_c extends CI_Controller {
 
 			$this->master_model_m->simpan_log($id_user, "Melakukan transaksi penjualan dengan nomor transaksi : <b>".$no_trx."</b>");
 
+		}
+
+		if($this->input->post('edit')){
+			$msg = 1;
+			$id_pelanggan    =   $this->input->post('pelanggan_sel');
+			$pelanggan 	     = $this->input->post('pelanggan');
+			$alamat_tagih    = $this->input->post('alamat_tagih');
+			$tgl_trx         = $this->input->post('tgl_trx');
+			$tgl_jatuh_tempo = "";
+			$no_trx          = $this->input->post('no_trx');
+			$no_trx2         = $this->input->post('no_trx2');
+			$id_pajak        = $this->input->post('id_pajak');
+			$sub_total       = str_replace(',', '', $this->input->post('sub_total'));
+			$pajak_total     = str_replace(',', '', $this->input->post('pajak_all'));
+			$total_all       = str_replace(',', '', $this->input->post('total_all'));
+			$sts_lunas       = $this->input->post('sts_lunas');
+			$akun_piutang    = $this->input->post('akun_piutang');
+			$kode_akun_pajak = $this->input->post('kode_akun_pajak');
+			$memo_lunas      = addslashes($this->input->post('memo_lunas'));
+			$unit 			 = $this->input->post('unit');
+
+			$contact_person  = $this->input->post('contact_person');
+			$validasi_tgl    = $this->input->post('validasi_tgl');
+			$include_ppn     = $this->input->post('include_ppn');
+
+			$atas_nama 		= addslashes($this->input->post('atas_nama'));
+			$ket_penawaran 	= $this->input->post('ket_penawaran');
+
+			if($sts_lunas == 1){
+				$akun_piutang = "";
+			}
+
+			$id_penawaran   = $this->input->post('id_penawaran');
+
+			$this->model->ubah_penawaran($id_penawaran, $id_klien, $no_trx, $id_pelanggan, $pelanggan, $alamat_tagih, $tgl_trx, $tgl_jatuh_tempo, $id_pajak, $sub_total, $pajak_total, $total_all, $sts_lunas, $memo_lunas, $akun_piutang, $kode_akun_pajak, $unit, $atas_nama, $ket_penawaran, $contact_person, $validasi_tgl, $include_ppn);
+		
+			$nama_produk 	= $this->input->post('nama_produk');
+			$qty 	        = $this->input->post('qty');
+			$satuan 		= $this->input->post('satuan');
+			$harga_satuan 	= $this->input->post('harga_satuan');
+			$jumlah 	 	= $this->input->post('jumlah');
+			$kode_akun 	 	= $this->input->post('kode_akun');
+
+			$this->model->hapus_detail_trx($id_penawaran);
+
+			foreach ($nama_produk as $key => $val) {
+				$this->model->simpan_detail_penjualan($id_penawaran, $id_klien, $val, $qty[$key], $satuan[$key], $harga_satuan[$key], $jumlah[$key], $kode_akun[$key]);
+			}
+
+			$this->master_model_m->simpan_log($id_user, "Mengubah transaksi penjualan dengan nomor transaksi : <b>".$no_trx."</b>");
 		}
 
 		if($this->input->post('cari')){
@@ -178,55 +226,17 @@ class Penawaran_barang_c extends CI_Controller {
 		$get_pajak = $this->model->get_pajak($id_klien);
 		$get_pel_sup = $this->model->get_pel_sup($id_klien);
 
-		if($this->input->post('simpan')){
-			$msg = 1;
-			$id_pelanggan     =   $this->input->post('pelanggan_sel');
-			$pelanggan 	      =   $this->input->post('pelanggan');
-			$alamat_tagih     =   $this->input->post('alamat_tagih');
-			$tgl_trx          =   $this->input->post('tgl_trx');
-			$tgl_jatuh_tempo  =   "";
-			$no_trx           =   $this->input->post('no_trx');
-			$no_trx2          =   $this->input->post('no_trx2');
-			$id_pajak         =   $this->input->post('id_pajak');
-			$sub_total        =   str_replace(',', '', $this->input->post('sub_total'));
-			$pajak_total      =   str_replace(',', '', $this->input->post('pajak_all'));
-			$total_all        =   str_replace(',', '', $this->input->post('total_all'));
-			$sts_lunas        =   $this->input->post('sts_lunas');
-			$akun_piutang     =   $this->input->post('akun_piutang');
-			$kode_akun_pajak  =   $this->input->post('kode_akun_pajak');
-			$memo_lunas       =   addslashes($this->input->post('memo_lunas'));
-
-			if($sts_lunas == 1){
-				$akun_piutang = "";
-			}
-
-			$this->model->ubah_penjualan($id, $no_trx, $id_pelanggan, $pelanggan, $alamat_tagih, $tgl_trx, $tgl_jatuh_tempo, $id_pajak, $sub_total, $pajak_total, $total_all, $sts_lunas, $memo_lunas, $akun_piutang, $kode_akun_pajak);
 		
-			$nama_produk 	= $this->input->post('nama_produk');
-			$qty 	        = $this->input->post('qty');
-			$satuan 		= $this->input->post('satuan');
-			$harga_satuan 	= $this->input->post('harga_satuan');
-			$jumlah 	 	= $this->input->post('jumlah');
-			$kode_akun 	 	= $this->input->post('kode_akun');
-
-			$this->model->hapus_detail_trx($id);
-
-			foreach ($nama_produk as $key => $val) {
-				$this->model->simpan_detail_penjualan($id, $id_klien, $val, $qty[$key], $satuan[$key], $harga_satuan[$key], $jumlah[$key], $kode_akun[$key]);
-			}
-
-			$this->master_model_m->simpan_log($id_user, "Mengubah transaksi penjualan dengan nomor transaksi : <b>".$no_trx."</b>");
-		}
 
 		$dt = $this->model->get_data_trx($id);
 		$dt_detail = $this->model->get_data_trx_detail($id);
 
 		$data =  array(
-			'page' => "edit_transaksi_penjualan_v", 
-			'title' => "Ubah Transaksi Penjualan", 
+			'page' => "edit_penawaran_barang_v", 
+			'title' => "Ubah Penawaran Barang", 
 			'msg' => "", 
-			'master' => "input_data", 
-			'view' => "transaksi_penjualan", 
+			'master' => "penjualan", 
+			'view' => "penawaran_barang_v", 
 			'msg' => $msg, 
 			'dt' => $dt, 
 			'dt_detail' => $dt_detail, 
@@ -235,11 +245,12 @@ class Penawaran_barang_c extends CI_Controller {
 			'get_all_produk' => $get_all_produk, 
 			'get_pel_sup' => $get_pel_sup, 
 			'get_pajak' => $get_pajak, 
-			'post_url' => 'transaksi_penjualan_c/ubah_data/'.$id, 
+			'post_url' => 'penawaran_barang_c', 
 		);
 		
 		$this->load->view('beranda_v', $data);
 	}
+
 
 	function detail($id=""){
 		$keyword = "";
@@ -247,6 +258,7 @@ class Penawaran_barang_c extends CI_Controller {
 		$kode_produk = "";
 		$sess_user = $this->session->userdata('masuk_akuntansi');
 		$id_klien = $sess_user['id_klien'];
+		$id_user = $sess_user['id'];
 
 		$list_akun = $this->model->get_list_akun($id_klien);
 		$get_list_akun_all = $this->model->get_list_akun_all($id_klien);
@@ -254,52 +266,17 @@ class Penawaran_barang_c extends CI_Controller {
 		$get_pajak = $this->model->get_pajak($id_klien);
 		$get_pel_sup = $this->model->get_pel_sup($id_klien);
 
-		if($this->input->post('simpan')){
-			$msg = 1;
-			$id_pelanggan     =   $this->input->post('pelanggan_sel');
-			$pelanggan 	      =   $this->input->post('pelanggan');
-			$alamat_tagih     =   $this->input->post('alamat_tagih');
-			$tgl_trx          =   $this->input->post('tgl_trx');
-			$tgl_jatuh_tempo  =   "";
-			$no_trx           =   $this->input->post('no_trx');
-			$no_trx2          =   $this->input->post('no_trx2');
-			$id_pajak         =   $this->input->post('id_pajak');
-			$sub_total        =   str_replace(',', '', $this->input->post('sub_total'));
-			$pajak_total      =   str_replace(',', '', $this->input->post('pajak_all'));
-			$total_all        =   str_replace(',', '', $this->input->post('total_all'));
-			$sts_lunas        =   $this->input->post('sts_lunas');
-			$akun_piutang     =   $this->input->post('akun_piutang');
-			$kode_akun_pajak  =   $this->input->post('kode_akun_pajak');
-			$memo_lunas       =   addslashes($this->input->post('memo_lunas'));
-
-			if($sts_lunas == 1){
-				$akun_piutang = "";
-			}
-
-			$this->model->ubah_penjualan($id, $no_trx, $id_pelanggan, $pelanggan, $alamat_tagih, $tgl_trx, $tgl_jatuh_tempo, $id_pajak, $sub_total, $pajak_total, $total_all, $sts_lunas, $memo_lunas, $akun_piutang, $kode_akun_pajak);
 		
-			$nama_produk 	= $this->input->post('nama_produk');
-			$qty 	        = $this->input->post('qty');
-			$satuan 		= $this->input->post('satuan');
-			$harga_satuan 	= $this->input->post('harga_satuan');
-			$jumlah 	 	= $this->input->post('jumlah');
-
-			$this->model->hapus_detail_trx($id);
-
-			foreach ($nama_produk as $key => $val) {
-				$this->model->simpan_detail_penjualan($id, $id_klien, $val, $qty[$key], $satuan[$key], $harga_satuan[$key], $jumlah[$key]);
-			}
-		}
 
 		$dt = $this->model->get_data_trx($id);
 		$dt_detail = $this->model->get_data_trx_detail($id);
 
 		$data =  array(
-			'page' => "detail_transaksi_penjualan_v", 
-			'title' => "Detail Transaksi Penjualan", 
+			'page' => "detail_penawaran_v", 
+			'title' => "Ubah Penawaran Barang", 
 			'msg' => "", 
-			'master' => "input_data", 
-			'view' => "transaksi_penjualan", 
+			'master' => "penjualan", 
+			'view' => "penawaran_barang_v", 
 			'msg' => $msg, 
 			'dt' => $dt, 
 			'dt_detail' => $dt_detail, 
@@ -308,7 +285,7 @@ class Penawaran_barang_c extends CI_Controller {
 			'get_all_produk' => $get_all_produk, 
 			'get_pel_sup' => $get_pel_sup, 
 			'get_pajak' => $get_pajak, 
-			'post_url' => 'transaksi_penjualan_c/ubah_data/'.$id, 
+			'post_url' => 'penawaran_barang_c', 
 		);
 		
 		$this->load->view('beranda_v', $data);

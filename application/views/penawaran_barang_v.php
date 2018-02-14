@@ -111,12 +111,12 @@ if($last_cc->KODE_AKUN != "" || $last_cc->KODE_AKUN != null ){
 							<tr>
 								<td align="center">
 									<a target="blank" href="<?=base_url();?>penawaran_barang_c/cetak/<?=$row->ID;?>" class="btn btn-info" type="button" style="font-size: 15px; padding-right: 8px;"><i class="icon-print"></i></a>
-									
+
 									<a style="font-size: 15px; padding-right: 8px;" class="btn btn-danger" onclick="$('#dialog-btn').click(); $('#id_hapus').val('<?=$row->ID;?>');" href="javascript:;"><i class="icon-trash"></i></a>						
 									<a class="btn btn-warning" href="<?=base_url();?>penawaran_barang_c/ubah_data/<?=$row->ID;?>" style="font-size: 15px; padding-right: 8px;"><i class="icon-edit"></i></a>						
 									
 
-									<button onclick="detail_transaksi(<?=$row->ID;?>);" data-toggle="modal" data-target="#modal_detail" class="btn btn-info" type="button" style="font-size: 15px; padding-right: 8px;"><i class="icon-eye-open"></i></button>
+									<a href="<?=base_url();?>penawaran_barang_c/detail/<?=$row->ID;?>" class="btn btn-info" type="button" style="font-size: 15px; padding-right: 8px;"><i class="icon-eye-open"></i></a>
 								</td>
 								<td style="font-size:14px; text-align:center; vertical-align:middle;"> <?=$row->TGL_TRX;?> </td>
 								<td style="font-size:14px; text-align:left; vertical-align:middle;"> <?=$row->NO_BUKTI;?> </td>
