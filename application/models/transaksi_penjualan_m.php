@@ -48,6 +48,15 @@ class Transaksi_penjualan_m extends CI_Model
         WHERE ID_PENJUALAN = '$id'
         ";
 
+        return $this->db->query($sql)->row();
+    }
+
+    function get_data_trx_detail_a($id){
+        $sql = "
+        SELECT * FROM ak_penjualan_new_detail 
+        WHERE ID_PENJUALAN = '$id'
+        ";
+
         return $this->db->query($sql)->result();
     }
 

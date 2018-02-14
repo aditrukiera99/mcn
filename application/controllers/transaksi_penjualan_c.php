@@ -251,7 +251,7 @@ class Transaksi_penjualan_c extends CI_Controller {
 
 		
 		$dt = $this->model->get_data_trx($id);
-		$dt_detail = $this->model->get_data_trx_detail($id);
+		$dt_detail = $this->model->get_data_trx_detail_a($id);
 
 		$data =  array(
 			'page' => "edit_transaksi_penjualan_v", 
