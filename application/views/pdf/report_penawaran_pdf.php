@@ -153,16 +153,7 @@ $base_url2 .=  str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT
 				<td>PT. MITRA CENTRAL NIAGA</td>
 			</tr>
 			<tr>
-				<td>&nbsp;</td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
+				<td><img src="<?=$base_url2;?>assets/aaa.jpg" style="width: 80%;"></td>
 			</tr>
 			<tr>
 				<td>ABD.WACHID</td>
