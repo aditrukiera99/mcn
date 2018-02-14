@@ -74,14 +74,14 @@ $base_url2 .=  str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT
 			<th style="padding: 5px 5px 5px 5px; " align="center">Cash Back</th>
 			<th style="padding: 5px 5px 5px 5px; " align="center">Profit</th>
 			<th style="padding: 5px 5px 5px 5px; " align="center">Tempo</th>
-			<th style="padding: 5px 5px 5px 5px; " align="center">Ket</th>
+			<th style="padding: 5px 5px 5px 5px; " align="center">Tanggal Jatuh Tempo</th>
 		</tr>
 		<?PHP foreach ($data as $key => $row) { 
-			$jatuh_tempo = $row->JATUH_TEMPO + 1;
+			$jatuh_tempo = $row->JATUH_TEMPO;
 		?>
 		<tr>
 			<td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="center"><?=$row->TGL_TRX;?></td>
-			<td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="center"><?=$row->NO_DO;?></td>
+			<td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="center"><?=$row->NO_BUKTI;?></td>
 			<td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="center"><?=$row->NO_POL;?></td>
 			<td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="center"><?=$row->BROKER;?></td>
 			<td style="padding: 5px 5px 5px 5px;border:1px solid black; " align="left"><?=$row->PELANGGAN;?></td>

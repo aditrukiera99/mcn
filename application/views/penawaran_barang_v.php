@@ -102,7 +102,9 @@ if($last_cc->KODE_AKUN != "" || $last_cc->KODE_AKUN != null ){
 							<th align="center"> Aksi </th>
 							<th align="center"> Tanggal </th>
 							<th align="center"> Nomor </th>
+							<th align="center"> Perihal </th>
 							<th align="center"> Pelanggan </th>
+							<th align="center"> UP </th>
 						</tr>						
 					</thead>
 					<tbody id="tes">
@@ -120,7 +122,9 @@ if($last_cc->KODE_AKUN != "" || $last_cc->KODE_AKUN != null ){
 								</td>
 								<td style="font-size:14px; text-align:center; vertical-align:middle;"> <?=$row->TGL_TRX;?> </td>
 								<td style="font-size:14px; text-align:left; vertical-align:middle;"> <?=$row->NO_BUKTI;?> </td>
+								<td style="font-size:14px; text-align:left; vertical-align:middle;"> <?=$row->MEMO_LUNAS;?> </td>
 								<td style="font-size:14px; text-align:left; vertical-align:middle;"> <?=$row->PELANGGAN;?> </td>
+								<td style="font-size:14px; text-align:left; vertical-align:middle;"> <?=$row->UP;?> </td>
 							</tr>
 						<?PHP }	?>
 					</tbody>
